@@ -1,0 +1,34 @@
+<GridLayout rows="*, auto, 5*">
+    <GridLayout class="dialog-background" row="0" rowSpan="3" rows="*, auto, 5*" (tap)="closeDialog('close')"></GridLayout>
+    <StackLayout row="1" (tap)="ignoreTap()" (loaded)="dialogLoaded($event.object)">
+        <StackLayout class="dialog">
+            <GridLayout rows="auto, auto">
+                <GridLayout class="title-layout" [backgroundColor]="data.color" row="0" columns="*, auto, *">
+                    <GridLayout col="1" rows="*, auto, auto, *">
+                        <Label class="name" [class.titleOnly]="!data.subTitle" [text]="data.title" row="1"></Label>
+                        <Label *ngIf="data.subTitle" class="cancel" [text]="data.subTitle" row="2"></Label>
+                    </GridLayout>
+                    <Label *ngIf="!data.cannotCloseDialog" class="fal" col="2" text="&#xf00d;" (tap)="closeDialog('close')"></Label>
+                </GridLayout>
+                <GridLayout rows="auto, auto, *, auto" class="data-layout" row="1">
+                    <Label row="0" textWrap="true" [text]="data.message"></Label>
+                    <Label *ngIf="data.subMessage" row="1" textWrap="true" [text]="data.subMessage"></Label>
+                    <GridLayout *ngIf="data.cancelButtonText && data.okButtonText" class="button-layout" row="3" rows="auto, auto" columns="*, auto, *">
+                        <StackLayout class="hr-line" row="0" col="0" colSpan="3"></StackLayout>
+                        <Button class="borderless-button" row="1" col="0" [text]="data.cancelButtonText" (tap)="closeDialog('cancel')"></Button>
+                        <StackLayout class="ver-line" row="0" rowSpan="2" col="1"></StackLayout>
+                        <Button class="borderless-button" row="1" col="2" [text]="data.okButtonText" (tap)="closeDialog('ok')"></Button>
+                    </GridLayout>
+                    <GridLayout *ngIf="data.cancelButtonText && !data.okButtonText" class="button-layout" row="3" rows="auto, auto">
+                        <StackLayout class="hr-line" row="0"></StackLayout>
+                        <Button class="borderless-button" row="1" [text]="data.cancelButtonText" (tap)="closeDialog('cancel')"></Button>
+                    </GridLayout>
+                    <GridLayout *ngIf="!data.cancelButtonText && data.okButtonText" class="button-layout" row="3" rows="auto, auto">
+                        <StackLayout class="hr-line" row="0"></StackLayout>
+                        <Button class="borderless-button" row="1" [text]="data.okButtonText" (tap)="closeDialog('ok')"></Button>
+                    </GridLayout>
+                </GridLayout>
+            </GridLayout>
+        </StackLayout>
+    </StackLayout>
+</GridLayout>

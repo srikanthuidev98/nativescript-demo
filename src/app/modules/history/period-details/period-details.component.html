@@ -1,0 +1,21 @@
+<app-action-bar backBtnText="Back" title="Period Details"></app-action-bar>
+<GridLayout *ngIf="client$ | async; let client" rows="auto, *">
+    <StackLayout row="0" minHeight="10">
+        <app-payrate-scroller (filterChanged)="filterChanged($event)" [client]="client"></app-payrate-scroller>
+    </StackLayout>
+    <PullToRefresh (refresh)="refreshList($event)" color="#593c81" row="1">
+        <ScrollView *ngIf="visits$ | async; let visits" row="1">
+            <StackLayout>
+                <app-pay-detail row="0" col="0" [visits$]="visits$" [client]="client"></app-pay-detail>
+                <StackLayout *ngFor="let visit of visits; let i = index" (tap)="shiftTap(i)">
+                    <app-shift *ngIf="filter === 0 || +filter === +visit.CaregiverId" [showChevron]="true" [visit]="visit" [slideInIndex]="i"></app-shift>
+                </StackLayout>
+                <StackLayout *ngIf="!(loading$ | async)">
+                    <Label *ngIf="!hasShift && visits.length > 0" textWrap="true" class="no-shift-label" [text]="'No ' + payRateSelected +' Shifts at this time.'"></Label>
+                    <Label *ngIf="visits.length === 0 && (connection.hasInternet$ | async)" textWrap="true" class="no-shift-label" text="Unable to retrieve visits at this time. Please try again later."></Label>
+                    <Label *ngIf="!(connection.hasInternet$ | async)" class="no-shift-label" textWrap="true" text="Please connect to the internet to view your History."></Label>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </PullToRefresh>
+</GridLayout>

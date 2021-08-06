@@ -1,0 +1,88 @@
+<app-action-bar backBtnText="back" [titleCanBeTapped]="true" [title]="title" (titleTapped)="titleTapped()"></app-action-bar>
+<GridLayout height = "100%">
+    <Scrollview height = "100%">
+        <GridLayout height="100%" rows="*, auto">
+            <GridLayout *ngIf="!(loading$ | async) && messages.length === 0" class="no-messages-layout" row="0" rows="auto, auto">
+                <Label class="fal" row="0" text="&#xf4b3;"></Label>
+                <Label row="1" textWrap="true" text="No messages at this time."></Label>
+            </GridLayout>
+            <ListView #listview [visibility]="messages.length > 0 ? 'visible' : 'collapsed'" appHideKeyboard class='message-layout' row="0" [items]="messages" [itemTemplateSelector]="templateSelector" (itemLoading)="onItemLoading($event)" separatorColor="transparent">
+                <ng-template nsTemplateKey="sent" let-message="item" let-i="index">
+                    <StackLayout class="list-row" (tap)="disableTapHighlight()">
+                        <Label *ngIf="showDateSplit(i)" class="date-split" [text]="message.timestamp | date: 'fullDate'"></Label>
+                        <StackLayout orientation="horizontal"  horizontalAlignment="right" marginRight="0" paddingRight="0">
+                            <Label class="time" textWrap="true" [text]="message.timestamp | date: 'h:mm a'"></Label>
+                            <StackLayout marginRight="0" paddingRight="0">
+                                <!-- Message text -->
+                                <StackLayout *ngIf="message.content">
+                                    <Label class="sent" textWrap="true" [text]="message.content"></Label>
+                                </StackLayout>
+                                <!-- Image -->
+                                <StackLayout *ngIf="message.fileType === 1 && message.attachmentSource" class="picture-sent">
+                                    <Image stretch="fill" [src]="message.attachmentSource" (tap)="imageTapped(message)"></Image>
+                                </StackLayout>
+                                <!-- Attachment -->
+                                <GridLayout *ngIf="message.fileType !== 1 && message.attachmentSource" columns="auto, *" rows="*, auto, *" class="attachment-sent" (tap)="attachmentTapped(i)">
+                                    <Label class="fal" row="1" col="0" text="&#xf15c;"></Label>
+                                    <Label row="1" col="1" textWrap="true" [text]="message.filename"></Label>
+                                </GridLayout>
+                                <!-- Loading Image -->
+                                <StackLayout *ngIf="message.fileType === 1 && message.filename && !message.attachmentSource" class="loading-layout-sent">
+                                    <Label [text]="message.filename" textWrap="true"></Label>
+                                    <ActivityIndicator color="#593c81" [busy]="message.loadingAttachment"></ActivityIndicator>
+                                </StackLayout>
+                                <!-- Loading Attachment -->
+                                <StackLayout *ngIf="message.fileType !== 1 && message.filename && !message.attachmentSource" height="50" orientation="horizontal" class="loading-layout-sent">
+                                    <ActivityIndicator color="#593c81" [busy]="message.loadingAttachment"></ActivityIndicator>
+                                    <Label [text]="message.filename" textWrap="true"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </ng-template>
+
+                <ng-template nsTemplateKey="received" let-message="item" let-i="index" iosEstimatedRowHeight="0">
+                    <Stacklayout class="list-row" (tap)="disableTapHighlight()">
+                        <Label *ngIf="showDateSplit(i)" class="date-split" [text]="message.timestamp | date: 'fullDate'"></Label>
+                        <StackLayout orientation="horizontal" marginLeft="0" paddingLeft="0">
+                            <StackLayout marginLeft="-10">
+                                <!-- Message text -->
+                                <StackLayout *ngIf="message.content">
+                                    <Label class="received" textWrap="true" marginRight="90" [text]="message.content"></Label>
+                                </StackLayout>
+                                <!-- Image -->
+                                <StackLayout *ngIf="message.fileType === 1 && message.attachmentSource" class="picture-received">
+                                    <Image stretch="fill" [src]="message.attachmentSource" (tap)="imageTapped(message)"></Image>
+                                </StackLayout>
+                                <!-- Attachment -->
+                                <GridLayout *ngIf="message.fileType !== 1 && message.attachmentSource" columns="auto, *" rows="*, auto, *" class="attachment-received" (tap)="attachmentTapped(i)">
+                                    <Label class="fal" row="1" col="0" text="&#xf15c;"></Label>
+                                    <Label row="1" col="1" textWrap="true" [text]="message.filename"></Label>
+                                </GridLayout>
+                                <!-- Loading Image -->
+                                <StackLayout *ngIf="message.fileType === 1 && message.filename && !message.attachmentSource" class="loading-layout-received">
+                                    <Label [text]="message.filename" textWrap="true"></Label>
+                                    <ActivityIndicator color="#593c81" [busy]="message.loadingAttachment"></ActivityIndicator>
+                                </StackLayout>
+                                <!-- Loading Attachment -->
+                                <StackLayout *ngIf="message.fileType !== 1 && message.filename && !message.attachmentSource" height="50" orientation="horizontal" class="loading-layout-received">
+                                    <ActivityIndicator color="#593c81" [busy]="message.loadingAttachment"></ActivityIndicator>
+                                    <Label [text]="message.filename" textWrap="true"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                            <Label class="time" marginLeft="-95" [text]="message.timestamp | date: 'h:mm a'"></Label>
+                        </StackLayout>
+                    </Stacklayout>
+                </ng-template>
+            </ListView>
+            <GridLayout class="control-layout" row="1" columns="auto, auto, auto, *, auto">
+                <Button *ngIf="showControls" class="fas borderless-button" col="0" text="&#xf03e;" (tap)="choosePicture()"></Button>
+                <Button *ngIf="showControls" class="fas borderless-button" col="1" text="&#xf030;" (tap)="takePicture()"></Button>
+                <Button *ngIf="showControls" class="far borderless-button" col="2" text="&#xf0c6;" (tap)="chooseAttachment()"></Button>
+                <TextView class="textField" [class.noControls]="!showControls"  hint="Type message" col="3" (tap)="textViewTap()" (textChange)="onTextChange($event)" (loaded)="textViewLoaded($event.object)"></TextView>
+                <Button *ngIf="showSend" class="fas borderless-button" marginRight="10" col="4" text="&#xf1d8;" (tap)="sendTap()"></Button>
+            </GridLayout>
+            <app-custom-dialog *ngIf="dialogOpen" [data]="dialogData" row="0" rowSpan="2" (dialogClosed)="closeDialog($event)"></app-custom-dialog>
+        </GridLayout>
+    </Scrollview>
+</GridLayout>

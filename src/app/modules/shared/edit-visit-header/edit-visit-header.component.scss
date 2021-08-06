@@ -1,0 +1,42 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.name {
+    color: $primary-text;
+    font-size: 24;
+    font-weight: 300;
+    margin-left: 10;
+    margin-top: 10;
+}
+
+.date-layout {
+    margin-left: 10;
+    margin-top: -5;
+    margin-bottom: 10;
+
+    Label {
+        color: $secondary-text;
+        font-size: 18;
+
+        &.different {
+            color: $approval;
+        }
+    }
+}
+
+.sub-text {
+    color: $secondary-text;
+    font-size: 16;
+    margin-left: 10;
+    margin-right: 10;
+}
+
+.skip-button {
+    color: $link-blue;
+    text-decoration: underline;
+    margin-top: -5;
+
+    &:highlighted {
+        opacity: 0.9;
+    }
+}

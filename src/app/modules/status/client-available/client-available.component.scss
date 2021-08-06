@@ -1,0 +1,68 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.header-text {
+    color: $primary-text;
+    font-size: 25;
+    font-weight: 300;
+    margin-right: 20;
+    margin-left: 20;
+    margin-top: 20;
+    margin-bottom: 30;
+}
+
+.rectangle {
+    border-width: 2;
+    border-radius: 5;
+    height: auto;
+    margin: 10;
+
+    .font-image {
+        font-size: 75;
+        margin-top: 20;
+        margin-bottom: 20;
+        margin-left: 20;
+    }
+    
+    .footer-text {
+        color: $primary-text;
+        font-size: 35;
+        margin-right: 40;
+    }
+}
+
+.yes-rectangle {
+    @extend .rectangle;
+
+    border-color: $approval;
+
+    .font-image {
+        color: $approval;
+    }
+
+    &.selected {
+        background-color: $approval;
+
+        Label {
+            color: #ffffff;
+        }
+    }
+}
+
+.no-rectangle {
+    @extend .rectangle;
+
+    border-color: $error;
+
+    .font-image {
+        color: $error;
+    }
+
+    &.selected {
+        background-color: $error;
+
+        Label {
+            color: #ffffff;
+        }
+    }
+}

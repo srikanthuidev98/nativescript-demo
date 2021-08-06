@@ -1,0 +1,49 @@
+# Node.js with Angular
+# Build a Node.js project that uses Angular.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- integration
+
+jobs:
+- job: unit_tests
+  pool:
+# This will be needed for iOS testing    vmImage: macOS-latest
+    vmImage: ubuntu-latest
+
+  steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '10.x'
+    displayName: 'Install Node.js'
+
+  - script: |
+      npm install -g @angular/cli
+    displayName: 'Install angular/cli'
+  
+  - script: |
+      npm install -g nativescript
+    displayName: 'Install nativescript'
+  - task: CmdLine@2
+    inputs:
+      script: |
+        npm install
+    displayName: 'npm install'
+  - task: CmdLine@2
+    inputs:
+      script: |
+        echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;android-27;google_apis;x86'
+        echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n xamarin_android_emulator -k 'system-images;android-27;google_apis;x86' --force
+        $ANDROID_HOME/emulator/emulator -list-avds
+        echo "adb devices list"
+        $ANDROID_HOME/platform-tools/adb devices
+    displayName: 'Configure Android emulator'
+  - task: CmdLine@2
+    inputs:
+      script: |
+        
+# To do unit testing the Apex app will need to be updated by running "ns test init"
+#        tns test android --justlaunch
+#        tns test ios --justlaunch
+    displayName: 'Run unit tests'

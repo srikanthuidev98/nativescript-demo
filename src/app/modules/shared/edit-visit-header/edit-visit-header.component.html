@@ -1,0 +1,20 @@
+<GridLayout rows="auto, auto, auto, auto, auto">
+    <Label class="name" row="0" [text]="name"></Label>
+
+    <GridLayout class="date-layout" row="1" columns="auto, auto, auto, auto, auto">
+        <Label [class.different]="dateChanged" col="0" [text]="editVisit[1].Visit.CheckInTime | date: 'MMM d'"></Label>
+        <Label col="1" text=" - "></Label>
+        <Label [class.different]="checkInChanged" col="2" [text]="editVisit[1].Visit.CheckInTime | date: 'h:mma' | lowercase"></Label>
+        <Label col="3" text=" - "></Label>
+        <Label [class.different]="checkOutChanged" col="4" [text]="editVisit[1].Visit.CheckOutTime | date: 'h:mma' | lowercase"></Label>
+    </GridLayout>
+
+    <Label class="sub-text" row="2" textWrap="true" [text]="subText"></Label>
+
+    <GridLayout row="3" columns="auto, *, auto">
+        <Button class="borderless-button skip-button m-l-15" col="0" text="Back" (tap)="backTap()"></Button>
+        <Button *ngIf="!hideSkip" class="borderless-button skip-button m-r-15" col="2" text="Skip" (tap)="skipTap()"></Button>
+    </GridLayout>
+
+    <StackLayout class='hr-line m-t-10' row="4"></StackLayout>
+</GridLayout>

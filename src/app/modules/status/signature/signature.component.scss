@@ -1,0 +1,37 @@
+/* Add mobile styles for the signature component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.top-labels {
+    color: $primary-text;
+    font-size: 16;
+    margin: 10;
+    text-align: left;
+}
+
+.contact-list {
+    color: $primary-text;
+    font-size: 18;
+    background-color: #ffffff;
+    border-color: #d8d8d8;
+    border-width: 2;
+    border-radius: 1;
+    width: 80%;
+    padding: 7;
+    height: auto;
+    margin-top: 10;
+}
+
+.signature-container {
+    height: 200;
+    font-size: 22;
+    color: $primary-text;
+    background-color: #d8d8d8;
+    margin-top: 20;
+}
+
+.certify {
+    color: $primary-text;
+    font-size: 16;
+    margin: 10;
+    margin-top: 30;
+}

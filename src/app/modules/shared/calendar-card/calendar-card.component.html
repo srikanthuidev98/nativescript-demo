@@ -1,0 +1,32 @@
+<CardView class="cardStyle cardCancelledStyle" [class.completed]="visit.status === 7" [class.cancelled]="isScheduleVisitCancelled(visit)" margin="10" elevation="20" radius="5" shadowRadius="5" (loaded)="cardLoaded($event.object)">
+    <GridLayout rows="auto, auto" columns="*, 5*">
+        <!-- Date (Left Side) -->
+        <StackLayout class="left-label" row="0" rowSpan="2" col="0"></StackLayout>
+        <StackLayout class="left-label center" row="0" rowSpan="2" col="0">
+            <Label class="month" [text]="visit.checkInTime | date: 'LLL'"></Label>
+            <Label class="date" [text]="visit.checkInTime | date: 'dd'"></Label>
+        </StackLayout>
+
+        <!-- All Data -->
+        <GridLayout class="data-layout" columns="*, *2" rows="auto, auto, auto" row="0" col="1">
+            <Label class="title" text="Time" row="0" col="0"></Label>
+            <Label class="title" text="Address" row="1" col="0"></Label>
+            <Label class="title" text="Client" row="2" col="0"></Label>
+
+            <Label *ngIf="!isScheduleVisitCompletedOrCancelled(visit)" class="data" [text]="(visit.checkInTime | date: 'shortTime') + ' - ' + (visit.checkOutTime | date: 'shortTime') " textWrap="true" row="0" col="1"></Label>
+            <Label *ngIf="isScheduleVisitCancelled(visit)" class="data red" text="Cancelled" textWrap="true" row="0" col="1"></Label>
+            <Label *ngIf="visit.status === 7" class="data green" text="Completed" textWrap="true" row="0" col="1"></Label>
+            <Label class="data address" [text]="visit.address" textWrap="true" row="1" col="1" (tap)="addressTap()"></Label>
+            <Label class="data" [text]="visit.name" textWrap="true" row="2" col="1"></Label>
+        </GridLayout>
+
+        <!-- Bottom 3 buttons -->
+        <GridLayout class="bottom-button-layout" columns="*, auto, *, auto, *" row="1" col="1">
+            <Button class="borderless-button can-disable" [isEnabled]="!isScheduleVisitCompletedOrCancelled(visit)" text="Services" col="0" (tap)="servicesTap()"></Button>
+            <Label text="|" col="1"></Label>
+            <Button class="borderless-button" text="Details" col="2" (tap)="detailsTap()"></Button>
+            <Label text="|" col="3"></Label>
+            <Button class="borderless-button can-disable" [isEnabled]="!isScheduleVisitCompletedCancelledOrStarted(visit)" text="Check In" col="4" (tap)="checkinTap()"></Button>
+        </GridLayout>
+    </GridLayout>
+</CardView>

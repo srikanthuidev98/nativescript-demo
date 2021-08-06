@@ -1,0 +1,7 @@
+<!-- This component is used in checkout-container. Do not add action-bar to this component -->
+<StackLayout>
+    <Label class="title" text="This shift"></Label>
+    <app-shift *ngIf="visit$ | async; let visit" showReminder="true" [visit]="visit" [client$]="client$" [dualClient]="dualClient$ | async" [showViewServices]="true"></app-shift>
+    <Button class="secondary-button" text="Check Out" (tap)="checkoutTap()"></Button>
+    <Button class="borderless-button" text="Set a checkout reminder?" (tap)="reminderTap()"></Button>
+</StackLayout>

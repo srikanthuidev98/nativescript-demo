@@ -1,0 +1,110 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.unread-layout {
+    Label {
+        color: $primary-text;
+        font-size: 14;
+        color: $primary-text;
+        margin-top: 17;
+        margin-bottom: 17;
+    }
+
+    .trash {
+        text-align: right;
+        color: $primary;
+        padding-right: 20;
+        margin-left: 70;
+        font-size: 24;
+    }
+}
+
+.list-layout {
+    .name {
+        color: $primary-text;
+        font-size: 20;
+    }
+
+    .time {
+        color: $primary-text;
+        font-size: 14;
+    }
+
+    .content {
+        color: $primary-text;
+        font-size: 14;
+        margin-top: -10;
+    }
+
+    .message-bubble {
+        color: #ffffff;
+        width: 22;
+        border-radius: 11;
+        font-size: 12;
+        font-weight: 500;
+        background-color: $cta;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    &.first {
+        padding-top: 15;
+    }
+}
+
+.button-fab {
+    background-color: $primary;
+    width: 56;
+    height: 56;
+    border-radius: 28;
+
+    .header {
+        background-color: #ffffff;
+        border-width: 1;
+        border-color: $primary;
+
+        .fal {
+            font-size: 22;
+            color: $primary-text;
+        }
+    }
+
+    .checkBox {
+        margin-top: 17; // iOS Margin Top
+        width: 30;
+    }
+
+    .actions {
+        color: #ffffff;
+        font-size: 20;
+    }
+
+    .name {
+        color: $primary-text;
+    }
+}
+
+.initals-circle {
+    border-width: 2;
+    border-color: $primary;
+    height: 40;
+    width: 40;
+    border-radius: 80%;
+    margin-left: 10;
+    margin-right: 20;
+
+    &.selected {
+        border-color: $approval;
+    }
+}
+
+.initals {
+    text-align: center;
+    vertical-align: middle;
+    color: $primary;
+    font-size: 16;
+
+    &.selected {
+        color: $approval;
+    }
+}

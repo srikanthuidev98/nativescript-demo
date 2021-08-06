@@ -1,0 +1,32 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.title {
+    color: $primary-text;
+    font-size: 18;
+    padding: 10;
+}
+
+.textField {
+    color: $primary-text;
+    placeholder-color: $secondary-text;
+    font-size: 16;
+    border-width: 1;
+    margin-right: 20;
+    margin-left: 20;
+    margin-bottom: 10;
+
+    &.error {
+        border-color: $error;
+        placeholder-color: $error;
+    }
+}
+
+.validation-error {
+    margin-top: 20;
+    height: 30;
+}
+
+.primary-button {
+    margin-bottom: 20;
+}

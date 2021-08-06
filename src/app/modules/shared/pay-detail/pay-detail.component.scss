@@ -1,0 +1,31 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+
+.header {
+    font-size: 12;
+    color: $secondary-text;
+}
+
+.header-above {
+    @extend .header;
+    margin-top: 5;
+    margin-bottom: 2;
+}
+
+.header-below {
+    @extend .header;
+    margin-top: -2;
+    margin-bottom: 6;
+}
+
+.header-hours {
+    @extend .header-below;
+    color: $primary-text;
+}
+
+.cents {
+    font-size: 24;
+    vertical-align: top;
+    margin-top: -5;
+}

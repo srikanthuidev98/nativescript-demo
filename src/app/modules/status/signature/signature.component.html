@@ -1,0 +1,24 @@
+<app-action-bar backBtnText="Back" [title]="'SIGNATURE.TITLE' | translate"></app-action-bar>
+<ScrollView>
+    <StackLayout class="m-b-30">
+
+        <Label class="top-labels" [text]="'SIGNATURE.INSTRUCTIONS' | translate" textWrap="true"></Label>
+        <StackLayout class="hr-line m-t-10 m-b-10"></StackLayout>
+        <Label class="top-labels" [text]="fraudStatement" textWrap="true"></Label>
+
+        <app-ac-dropdown questionText="Signee name" hint="Please select Name" [items]="signees" (itemSelected)="onchange($event)"></app-ac-dropdown>
+
+        <StackLayout class=" center signature-container" (tap)="openSignatureModal()">
+            <Label *ngIf="!pathDest" text="Tap here to sign."></Label>
+            <Image [src]="pathDest"></Image>
+        </StackLayout>
+
+        <GridLayout columns="auto, *">
+            <StackLayout class="center m-l-10" ios:marginTop="10" android:marginTop="5" col="0">
+                <CheckBox width="30" col="0" fontSize="20" onCheckColor="white" [(ngModel)]="isChecked" fillColor="#593c81"></CheckBox>
+            </StackLayout>
+            <Label col="1" class="certify" [text]="'SIGNATURE.CERTIFY' | translate" textWrap="true"></Label>
+        </GridLayout>
+        <Button class="primary-button-disabled" [isEnabled]="selectedContactId !== -1 && isChecked && pathDest !== ''" [text]="'SIGNATURE.APPROVEBTN' | translate" (tap)="sign()"></Button>
+    </StackLayout>
+</ScrollView>

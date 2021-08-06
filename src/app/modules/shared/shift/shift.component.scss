@@ -1,0 +1,24 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.left-background-color {
+    background-color: $primary;
+}
+
+.left-bottom-date {
+    font-size: 22;
+    margin-top: -5;
+}
+
+.reminder {
+    color: $link-blue;
+}
+
+.services {
+    color: $link-blue;
+    font-size: 18;
+    text-align: right;
+    vertical-align: top;
+    margin-right: 20;
+    margin-top: 5;
+}

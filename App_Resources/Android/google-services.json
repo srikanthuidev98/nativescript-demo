@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "384549170618",
+    "firebase_url": "https://assuricarecaregiver-production.firebaseio.com",
+    "project_id": "assuricarecaregiver-production",
+    "storage_bucket": "assuricarecaregiver-production.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:384549170618:android:28a6c40f00ed1cc6100183",
+        "android_client_info": {
+          "package_name": "com.assuricare.apex.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "384549170618-daihf1ahfkncbi0rvcpuna2l0eu4qhsg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbdw3i2D61eoRO02qt00BfJOl-7ayMQmg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "384549170618-daihf1ahfkncbi0rvcpuna2l0eu4qhsg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "384549170618-pp4sfscd0fmgannb3i29ih2jqhr59nr4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.assuricare.apex.ios"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

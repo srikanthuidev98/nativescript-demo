@@ -1,0 +1,46 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.circle {
+    clip-path: circle(80% at 50% 50%);
+    text-align: center;
+}
+
+.out-circle {
+    @extend .circle;
+    background-color: $primary;
+}
+
+.in-circle {
+    @extend .circle;
+    background-color: #ffffff;
+}
+
+.time-header {
+    font-size: 10;
+    color: $primary-text;
+}
+
+.time {
+    font-size: 30;
+    color: $primary;
+    font-weight: 300;
+}
+
+@keyframes spin {
+    from { transform: rotate(0); }
+    to { transform: rotate(360); }
+    
+}
+.clock { 
+    text-align: center;   
+    animation-name: spin;
+    -webkit-animation-name: spin; 
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+
+  
+   
+}

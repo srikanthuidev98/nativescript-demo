@@ -1,0 +1,29 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.no-faq {
+    color: $primary-text;
+    font-size: 16;
+    margin-top: 10;
+    margin-bottom: 10;
+}
+
+
+.title {
+    color: $primary-text;
+    font-size: 22;
+    margin-top: 10;
+    margin-bottom: 0;
+}
+
+.title-btn {
+    font-size: 22;
+    margin-bottom: 10;
+}
+
+.or-title {
+    color: $primary-text;
+    font-size: 26;
+    margin: 10;
+    margin-top: 0;
+}

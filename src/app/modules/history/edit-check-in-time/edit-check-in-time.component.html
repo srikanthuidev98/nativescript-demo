@@ -1,0 +1,19 @@
+<app-action-bar backBtnText="Back" title="Check In Time"></app-action-bar>
+<ScrollView>
+    <StackLayout backgroundColor="white" (loaded)="fadeOut($event)">
+        <GridLayout rows="auto, auto, auto, auto">
+            <app-edit-visit-header *ngIf="editVisit$ | async; let editVisit" [editVisit]="editVisit" [useRegularBack]="true" row="0" (skip)="saveTap()"></app-edit-visit-header>
+
+            <StackLayout row="1">
+                <ac-time-picker *ngIf="editVisit$ | async; let editVisit" [minDate]="minDate" [maxDate]="maxDate" [date]="checkinDate" (dayChanged)="onDayChanged($event)" (timeChanged)="onTimeChanged($event)"></ac-time-picker>
+            </StackLayout>
+
+            <Label row="2" minHeight="30" class="validation-error" marginTop="30" textWrap="true" [text]="errorText"></Label>
+
+            <GridLayout class="double-button-layout" row="3" columns="*, *">
+                <Button class="whiteButton" col="0" text="Revert" (tap)="resetTap()"></Button>
+                <Button col="1" text="Save" [isEnabled]="errorText === ''" (tap)="saveTap(true)"></Button>
+            </GridLayout>
+        </GridLayout>
+    </StackLayout>
+</ScrollView>

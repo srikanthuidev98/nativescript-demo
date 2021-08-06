@@ -1,0 +1,60 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.main-header {
+    color: $secondary-text;
+    font-weight: 300;
+    font-size: 35;
+    text-align: center;
+    margin-top: 20;
+    margin-right: 20;
+    margin-left: 20;
+}
+
+.header {
+    color: $primary-text;
+    font-weight: 500;
+    font-size: 16;
+    margin-left: 10;
+}
+
+.name-header {
+    color: $secondary-text;
+    font-weight: 300;
+    font-size: 35;
+    text-align: center;
+    margin-bottom: 20;
+    margin-right: 20;
+    margin-left: 20;
+}
+
+.status {
+    color: $secondary-text;
+    font-size: 20;
+    margin-left: 20;
+    margin-top: 10;
+}
+
+.status-bold {
+    color: $primary-text;
+    font-size: 20;
+    margin-top: 10;
+}
+
+.break {
+    margin-top: 20;
+    margin-bottom: 10;
+}
+
+.borderless-button {
+    text-align: left;
+    font-size: 18;
+    margin-left: 10;
+}
+
+.checkin-text {
+    color: $primary-text;
+    margin: 10;
+    font-size: 16;
+    text-align: left;
+}

@@ -1,0 +1,94 @@
+<app-action-bar title="Profile"></app-action-bar>
+<ScrollView #scrollview>
+    <StackLayout class="p-t-10 m-b-20">
+        <GridLayout rows="60, *, 5, *, *" columns="10, *, 2*, *, 10">
+            <Image row="1" col="1" rowSpan="4" colSpan="3" src="res://cityscape" height="200" stretch="fill" ></Image>
+            <ContentView class="rectangle" row="1" col="1" rowSpan="4" colSpan="3"></ContentView>
+            <ContentView row="0" col="2" rowSpan="3" backgroundColor="white" borderRadius="300%" heigth="140" width="140"></ContentView>
+
+            <Image *ngIf="path" stretch="fill" [useCache]="false" row="0" col="2" rowSpan="2" height="130" width="130" borderRadius="300%" [src]="path" (tap)="pictureTap()"></Image>
+            <ContentView *ngIf="!path" row="0" col="2" rowSpan="2" class="initals-circle" (tap)="pictureTap()">
+                <Label class="initals" [text]="initals"></Label>
+            </ContentView>
+            <StackLayout class="camera-view" row="0" col="2" rowSpan="2">
+                <Label class="fas" android:marginRight="10" text="&#xf030;" (tap)="pictureTap()"></Label>
+            </StackLayout>
+
+            <StackLayout row="3" col="2">
+                <Label *ngIf="caregiver$ | async; let caregiver" [text]="caregiver.Name" marginTop="8" fontSize="22" color="white" textAlignment="center"></Label>
+            </StackLayout>
+
+            <StackLayout class="verCenter" row="4" col="1" colSpan="2">
+                <Label class="cert-title"  text="Certifications"></Label>
+            </StackLayout>
+            <StackLayout class="verCenter" row="4" col="2" colSpan="2">
+                <Label class="cert-data" textWrap="true" [text]="credentials"></Label>
+            </StackLayout>
+        </GridLayout>
+
+        <CardView *ngIf="profileInfo$ | async; let info" class="cardStyle" margin="10" elevation="20" radius="5" shadowRadius="5">
+            <GridLayout rows="40, auto, auto, auto, auto" columns="*, 2*">
+                <GridLayout class="header" columns="90, *" col="0" row="0" colSpan="2">
+                    <Label class="fal" text="&#xf1d8;" col="0"></Label>
+                    <Label text="Contact Info" col="1"></Label>
+                </GridLayout>
+
+                <Label class="option-title m-t-15" text="Phone" col="0" row="1"></Label>
+                <Label class="option-data left m-t-15" col="1" row="1" [text]="info.Cellphone | phone"></Label>
+
+                <Label class="option-title m-t-15" col="0" row="2" text="Email"></Label>
+                <Label class="option-data left m-t-15" col="1" row="2" [text]="info.Email"></Label>
+
+                <Label class="option-title top m-t-15" text="Address" col="0" row="3"></Label>
+                <Label class="option-data left m-t-15" [text]="address" textWrap="true" col="1" row="3" ></Label>
+
+                <!-- TODO - Edit Button -->
+                <Label class="edit-btn" text="" col="1" row="4"></Label>
+            </GridLayout>
+        </CardView>
+
+        <CardView *ngIf="showFinancialInfo" class="cardStyle" margin="10" elevation="20" radius="5" shadowRadius="5">
+            <GridLayout rows="40, auto">
+                <GridLayout class="header" columns="90, *" row="0">
+                    <Label class="fal" text="&#xf19c;" col="0"></Label>
+                    <Label text="Financial Info" col="1"></Label>
+                </GridLayout>
+
+                <GridLayout *ngIf="profileInfo$ | async; let info" columns="*, auto" rows="auto, auto" row="1">
+                    <Label class="option-title m-t-15" col="0" row="0" text="Account Number"></Label>
+                    <Label class="option-data m-t-15" textAlignment="right" col="1" row="0" [text]="info.FinancialInfo.BankAccountNumber"></Label>
+
+                    <Label class="option-title m-t-15 m-b-15" text="Routing Number" col="0" row="1"></Label>
+                    <Label class="option-data m-t-15 m-b-15" textAlignment="right" [text]="info.FinancialInfo.BankRoutingNumber" col="1" row="1"></Label>
+                </GridLayout>
+
+                <!-- TODO - Edit Button -->
+                <!-- <Label class="edit-btn" text="" col="1" row="4"></Label> -->
+            </GridLayout>
+        </CardView>
+
+        <CardView class="cardStyle" margin="10" elevation="20" radius="5" shadowRadius="5">
+            <GridLayout rows="40, auto">
+                <GridLayout class="header" columns="90, *" row="0">
+                    <Label class="fal" text="&#xf2c2;" col="0"></Label>
+                    <Label text="Caregiver IDs" col="1"></Label>
+                </GridLayout>
+                <StackLayout class="ids-layout" row="1" col="0">
+                    <GridLayout *ngFor="let clients of uniqueClients; let i = index" class="m-t-5" rows="*, auto, auto" columns="*, auto" (tap)="clientTap(i)">
+                        <Label class="purple" [text]="clients[0].Name" row="0"></Label>
+                        <Label [class.up]="selectedClient === i" [class.down]="selectedClient !== i" class="fal dropdown-chervon" row="0" col="1" text="&#xf078;"></Label>
+                        <StackLayout *ngIf="selectedClient === i" row="2" col="0" colSpan="2">
+                            <GridLayout *ngFor="let client of clients" rows="auto, auto, auto" columns="*, auto">
+                                <Label class="italic" textWrap="true" [text]="client.PayRateComment" row="0" col="0"></Label>
+                                <Label class="italic" [text]="client.extra" row="1" col="0" colSpan="2"></Label>
+                                <Label class="purple m-r-20" [text]="client.CaregiverId" row="0" col="1"></Label>
+                                <StackLayout class="hr-line" row="2" col="0" colSpan="2"></StackLayout>
+                            </GridLayout>
+                        </StackLayout>
+                        <StackLayout class="hr-line" row="1" col="0" colSpan="2"></StackLayout>
+                    </GridLayout>
+                </StackLayout>
+            </GridLayout>
+        </CardView>
+    </StackLayout>
+</ScrollView>

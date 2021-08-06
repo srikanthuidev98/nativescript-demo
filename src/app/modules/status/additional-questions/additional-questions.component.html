@@ -1,0 +1,14 @@
+<app-action-bar backBtnText="Back" [title]="title" titleColor="#e00720"></app-action-bar>
+<GridLayout>
+    <ScrollView>
+        <StackLayout>
+            <StackLayout *ngFor="let question of questions" marginTop="10">
+                <app-question [question]="question"></app-question>
+                <StackLayout class="hr-line" marginTop="3"></StackLayout>
+            </StackLayout>
+            <Label class="validation-error" minHeight="30" marginTop="10" textWrap="true" [text]="errorText"></Label>
+            <Button class="primary-button" text="Continue" (tap)="continueTap()"></Button>
+        </StackLayout>
+    </ScrollView>
+    <app-custom-dialog *ngIf="dialogOpen" [data]="dialogData" row="0" (dialogClosed)="closeDialog($event)"></app-custom-dialog>
+</GridLayout>

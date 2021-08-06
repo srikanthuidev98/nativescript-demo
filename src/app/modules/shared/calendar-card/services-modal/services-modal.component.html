@@ -1,0 +1,15 @@
+<StackLayout backgroundColor="#fff">
+    <StackLayout width="100%" marginRight="5"></StackLayout>
+    <GridLayout rows="auto, *">
+        <GridLayout class="title-layout" row="0" columns="*, auto, *" rows="auto, auto">
+            <Label class="name" [text]="name" col="1" row="0"></Label>
+            <Label class="cancel" text="Requested Services" col="1" row="1"></Label>
+            <Label class="fal" col="2" row="0" rowSpan="2" text="&#xf00d;" (tap)="closeModal()"></Label>
+        </GridLayout>
+        <ScrollView row="1">
+            <StackLayout>
+                <app-calendar-services [tasks]="tasks"></app-calendar-services>
+            </StackLayout>
+        </ScrollView>
+    </GridLayout>
+</StackLayout>

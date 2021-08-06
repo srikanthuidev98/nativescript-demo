@@ -1,0 +1,12 @@
+<GridLayout rows="auto, auto, auto">
+    <GridLayout class="date-picker-layout" row="0" columns="*, auto, auto, auto, *">
+        <Button col="1" text="&#xf060;" [class.disabled]="noLeft" class="far" (tap)="changeDate(-1)"></Button>
+        <Label *ngIf="updateDate" class="date" col="2" [text]="date | date: 'MMMM d'"></Label>
+        <Label *ngIf="!updateDate" class="date" col="2" [text]="date | date: 'MMMM d'"></Label>
+        <Button col="3" text="&#xf061;" [class.disabled]="noRight" class="far" (tap)="changeDate(1)"></Button>
+    </GridLayout>
+
+    <TimePicker (loaded)="pickerLoaded($event)" class="picker" row="1" [hour]="date.getHours()" [minute]="date.getMinutes()" (timeChange)="onTimeChanged($event)"></TimePicker>
+
+    <StackLayout class='hr-line' row="2"></StackLayout>
+</GridLayout>

@@ -1,0 +1,22 @@
+<app-action-bar backBtnText="Back" title="Current Period"></app-action-bar>
+<GridLayout rows="auto, *" (tap)="navigateToAddShift()">
+    <Button ios:marginBottom="20" [text]="'Add Shift'" (tap)="navigateToAddShift()"></Button>
+    <StackLayout row="0" minHeight="10">
+        <app-payrate-scroller *ngIf="client$ | async; let client" (filterChanged)="filterChanged($event)" [client]="client"></app-payrate-scroller>
+    </StackLayout>
+    <PullToRefresh (refresh)="refreshList($event)" row="1" color="#593c81">
+        <ScrollView *ngIf="visits$ | async; let visits" row="1">
+            <StackLayout>
+                <app-timer *ngIf="visits.length > 0" [hideAnimation]="true" [visits]="visits" [payroll]="payroll"></app-timer>
+                <StackLayout *ngFor="let visit of visits; let i = index" (tap)="shiftTap(i)">
+                    <app-shift *ngIf="filter === 0 || +filter === +visit.CaregiverId" [showChevron]="true" [visit]="visit" [slideInIndex]="i"></app-shift>
+                </StackLayout>
+                <StackLayout *ngIf="!(loading$ | async)">
+                    <Label *ngIf="!hasShift && visits.length > 0" textWrap="true" class="no-shift-label" [text]="'No ' + payRateSelected +' Shifts at this time.'"></Label>
+                    <Label *ngIf="visits.length === 0 && (connection.hasInternet$ | async)" textWrap="true" class="no-shift-label" [text]="noShiftsMessage"></Label>
+                    <Label *ngIf="!(connection.hasInternet$ | async)" class="no-shift-label" textWrap="true" text="Please connect to the internet to view your Current Period."></Label>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </PullToRefresh>
+</GridLayout>

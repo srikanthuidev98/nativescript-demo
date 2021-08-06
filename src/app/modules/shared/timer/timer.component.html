@@ -1,0 +1,21 @@
+<StackLayout>
+    <GridLayout ios:padding="5" rows="230" columns="*, 230, *">
+        <ContentView *ngIf="hideAnimation" class="circle" row="0" col="1" backgroundColor="#593c81" heigth="200" width="200"></ContentView>
+        <ContentView *ngIf="hideAnimation" class="circle" row="0" col="1" backgroundColor="#ffffff" heigth="185" width="195"></ContentView>
+        <ContentView *ngIf="!hideAnimation" class="in-circle" row="0" col="1" heigth="220" width="220" id="theclock">
+                <Image ios:margin="10" id="rotatingCircle" src="res://animatedcircle" (loaded)="startAnimation($event)"></Image>
+        </ContentView>
+
+        <StackLayout *ngIf="visit$" class="center p-b-7" row="0" col="1">
+            <Label *ngIf="visit$ | async; let shift" class="time-header" [text]="'Checked In ' + (shift.CheckInTime | date: 'shortTime') "></Label>
+            <Label class="time" [text]="timerService.timerString$ | async"></Label>
+        </StackLayout>
+
+        <StackLayout *ngIf="!visit$" class="center" row="0" col="1">
+            <Label class="time-header" text="Total Hours"></Label>
+            <Label class="time" [text]="totalTime"></Label>
+            <Label class="time-header" *ngIf="payroll" [text]="(payroll.PeriodStartDate | date: 'MMM d') + ' - ' + (payroll.PeriodEndDate | date: 'MMM d')"></Label>
+        </StackLayout>
+    </GridLayout>
+    <StackLayout class="hr-line"></StackLayout>
+</StackLayout>

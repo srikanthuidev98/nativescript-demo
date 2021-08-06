@@ -1,0 +1,10 @@
+<StackLayout *ngIf="clientList.length > 1" class="main" backgroundColor="#eeeeee">
+    <ScrollView orientation="horizontal" (loaded)="scrollBarLoaded($event)">
+        <StackLayout orientation="horizontal" height="auto">
+            <GridLayout *ngFor="let rate of payRateList; let i = index" class="payrate-tab-container" rows="*, auto" columns="auto">
+                <Button [class.selected]="filter === i" row="0" col="0" ios:marginRight="10" ios:marginLeft="10" [text]="rate" (tap)="filterTap(i)"></Button>
+                <StackLayout [class.selected]="filter === i" row="1" col="0"></StackLayout>
+            </GridLayout>
+        </StackLayout>
+    </ScrollView>
+</StackLayout>

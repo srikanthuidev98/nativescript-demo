@@ -1,0 +1,16 @@
+<StackLayout class="full-layout">
+    <GridLayout *ngFor="let task of tasks" rows="auto, auto, auto, auto">
+        <StackLayout class="layout-margin" row="0">
+            <Label class="service" [text]="task.task" row="0" col="0"></Label>
+            <Label *ngIf="task.timesPerDay" class="frequency" [text]="task.timesPerDay + ' times every: '"></Label>
+            <Label *ngIf="task.frequency" class="frequency" textWrap="true" [text]="task.frequency"></Label>
+        </StackLayout>
+        <Label class="comment" textWrap="true" [text]="task.comment" row="1"></Label>
+        <GridLayout class="layout-margin" row="2" marginTop="10" columns="*, auto, *">
+            <Label class="category" [text]="task.categoryName" col="0"></Label>
+            <StackLayout class="ver-line" marginBottom="-5" col="1"></StackLayout>
+            <Label *ngIf="task.isRequired" class="required" text="  Required  " col="2"></Label>
+        </GridLayout>
+        <StackLayout class="hr-line" row="3"></StackLayout>
+    </GridLayout>
+</StackLayout>

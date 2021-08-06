@@ -1,0 +1,38 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.label-text {
+    color: $primary;
+    font-size: 20;
+    text-align: left;
+    margin-top: 20;
+    margin-bottom: 20;
+    margin-left: 10;
+    margin-right: 10;
+}
+
+.client-layout {
+    Label {
+        color: $secondary-text;
+        font-size: 18;
+    }
+
+    .client-label {
+        margin-left: 20;
+        margin-top: 15;
+        margin-bottom: 15;
+    }
+}
+
+.payrate-layout {
+    Label {
+        margin-left: 40;
+        margin-top: 15;
+        margin-bottom: 15;
+        font-style: italic;
+    }
+
+    .pay-label {
+        margin-left: 10;
+    }
+}

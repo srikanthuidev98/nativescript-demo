@@ -1,0 +1,26 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.day-picker {
+    font-size: 20;
+    color: $primary-text;
+}
+
+.time-title {
+    color: $primary-text;
+    font-size: 24;
+    margin-bottom: 20;
+}
+
+.clicker {
+    height: 130;
+    width: 80;
+    background-color: $primary;
+
+    .clicker-text {
+        color: white;
+        font-size: 22;
+        width: 50;
+    }
+}
+

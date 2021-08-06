@@ -1,0 +1,7 @@
+<GridLayout rows="auto, auto" iosOverflowSafeArea="false">
+    <Image #image class="image" row="1" stretch="aspectFit" [src]="source" (pan)="onPan($event)" (doubleTap)="onDoubleTap($event)" (pinch)="onPinch($event)"></Image>
+    <GridLayout row="0" columns="auto, *, auto">
+        <Label col="0" text="Save" (tap)="saveTap()"></Label>
+        <Label col="2" text="Close" (tap)="closeTap()"></Label>
+    </GridLayout>
+</GridLayout>

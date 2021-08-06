@@ -1,0 +1,78 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.question-layout {
+    Label {
+        color: $primary-text;
+        font-size: 18;
+        margin-left: 10;
+
+        &.error {
+            color: $error;
+        }
+    }
+
+    TextView {
+        color: black;
+        font-size: 18;
+        border-color: $border;
+        border-width: 1;
+        border-radius: 2;
+        min-height: 38;
+        padding-left: 5;
+        placeholder-color: #b1b1b1;
+
+        &.notEditable {
+            color: #8a8a8a;
+            background-color: #f8f8f8;
+        }
+    }
+
+    // GridLayout {
+    //     margin-top: 10;
+    //     margin-bottom: 10;
+    // }
+}
+
+// .button-layout {
+//     Button {
+//         color: $primary;
+//         background-color: #ffffff;
+//         border-color: $primary;
+//         font-size: 16;
+//         border-width: 1;
+//         border-radius: 3;
+//         width: 35%;
+
+//         &.selected {
+//             color: #ffffff;
+//             background-color: $primary;
+//         }
+//     }
+// }
+
+.dropdown-box {
+    color: $primary-text;
+    font-size: 18;
+    background-color: #ffffff;
+    border-color: $border;
+    border-width: 1;
+    border-radius: 2;
+    padding: 10;
+    padding-left: 7;
+    margin-left: 15;
+    margin-right: 15;
+    placeholder-color: #b1b1b1;
+
+    &.notEditable {
+        color: #8a8a8a;
+        background-color: #f8f8f8;
+    }
+}
+
+.chevron {
+    color: #828282;
+    font-size: 18;
+    text-align: center;
+    margin-right: 30;
+}

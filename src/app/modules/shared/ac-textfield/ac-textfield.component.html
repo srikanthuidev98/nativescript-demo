@@ -1,0 +1,28 @@
+<!-- Email Text Field -->
+<GridLayout *ngIf="type === 'email'"  columns="*, auto" rows="30, auto">
+    <Label *ngIf="floatHint" class="hint" col="0" row="0" [text]="text"></Label>
+    <TextField class="textField" [hint]="text" [text]="initalText" ios:marginTop="10" autocapitalizationType="none" col="0" row="1" colSpan="2" keyboardType="email" [borderColor]="borderColor" (textChange)="onTextChange($event)" (focus)="onFocus()" (blur)="onBlur()" ></TextField>
+</GridLayout>
+
+<!-- Password Text Field with Show/Hide Button -->
+<GridLayout *ngIf="type === 'password'"  columns="*, auto" rows="30, auto">
+    <Label *ngIf="floatHint" class="hint" col="0" row="0" [text]="text"></Label>
+    <TextField class="textField" [hint]="text" [text]="initalPasswordText" maxLength="20" ios:marginTop="10" col="0" row="1" colSpan="2" [secure]="!showPassword" [borderColor]="borderColor" (textChange)="onTextChange($event)" (focus)="onFocus()" (blur)="onBlur()" ></TextField>
+    <Button class="borderless-button" ios:marginRight="20" ios:marginBottom="10" col="1" row="1" [text]="showPasswordText" (tap)="passwordToggle()"></Button>
+</GridLayout>
+
+<!-- <GridLayout rows="*" cols="*, 50"> -->
+    <!-- Email Text Field -->
+    <!-- <MDTextField *ngIf="type === 'email'" class="textField" col="0" (textChange)="onTextChange($event)"  backgroundColor="white" keyboardType="email"
+        [hint]="text" returnKeyType="next"></MDTextField> -->
+
+    <!-- Password Text Field with Show/Hide Button -->
+    <!-- <MDTextField *ngIf="type === 'password'" class="textField" (textChange)="onTextChange($event)" col="0" backgroundColor="white"
+        [hint]="text" returnKeyType="next" secure="true"></MDTextField> -->
+
+    <!-- <Button *ngIf="type === 'password'" (tap)="test()" col="1" width="50" backgroundColor="red" text="Show"></Button> -->
+
+    <!-- General -->
+    <!-- <MDTextField *ngIf="type === 'general'" class="textField" (textChange)="onTextChange($event)"  col="0" backgroundColor="white"
+        [hint]="text" returnKeyType="next"></MDTextField> -->
+<!-- </GridLayout> -->

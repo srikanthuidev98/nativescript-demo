@@ -1,0 +1,54 @@
+<app-action-bar backBtnText="Back" title="Shift Details"></app-action-bar>
+<ScrollView>
+    <StackLayout *ngIf="visit$ | async; let visit">
+        <Button *ngIf="showEditVisitButton" class="borderless-button edit-button" android:marginTop="0" android:marginBottom="0" text="Edit Visit Details" (tap)="editTimeButtonTap()"></Button>
+        <app-shift [visit]="visit"></app-shift>
+        <StackLayout *ngIf="client$ | async; let client">
+            <StackLayout>
+                <app-pay-detail [visit$]="visit$" [client]="payDetailClient" [slideInIndex]="1"></app-pay-detail>
+            </StackLayout>
+
+            <CardView class="cardStyle" margin="10" elevation="20" radius="5" shadowRadius="5" (loaded)="cardLoaded($event.object, 2)">
+                <GridLayout rows="auto" columns="*, 3*, 2*">
+                    <Label col="0" row="0" class="left-adl" text=""></Label>
+                    <Label col="0" row="1" class="left-adl" text=""></Label>
+                    <Label class="left-adl" col="0" row="0" verticalAlignment="center" text="ADL"></Label>
+
+                    <StackLayout *ngIf="adls.length === 0" col="1" row="0" colSpan="2" class="m-t-10 m-b-10"> <!-- No ADLs -->
+                        <Label class="option-title iadl-data m-t-10 m-b-10" text="No ADLs for this shift."></Label>
+                    </StackLayout>
+
+                    <StackLayout *ngIf="adls.length > 0" col="1" row="0" class="m-t-10 m-b-10"> <!-- Has ADLs -->
+                        <StackLayout *ngFor="let adl of adls" >
+                            <Label class="option-title m-t-5" [text]="adl.key"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout col="2" row="0" class="m-t-10 m-b-10">
+                        <StackLayout *ngFor="let adl of adls" >
+                            <Label class="option-data m-t-5" [text]="adl.val"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                </GridLayout>
+            </CardView>
+
+            <CardView class="cardStyle" margin="10" elevation="20" radius="5" shadowRadius="5" (loaded)="cardLoaded($event.object, 3)">
+                <GridLayout rows="auto" columns="*, 5*">
+                    <Label col="0" row="0" class="left-iadl" text=""></Label>
+                    <Label col="0" row="1" class="left-iadl" text=""></Label>
+                    <Label class="left-iadl" col="0" row="0" verticalAlignment="center" text="IADL"></Label>
+
+                    <StackLayout *ngIf="iadls.length === 0" col="1" row="0" colSpan="2" class="m-t-10 m-b-10"> <!-- No IADLs -->
+                        <Label class="option-title iadl-data m-t-10 m-b-10" text="No IADLs for this shift."></Label>
+                    </StackLayout>
+
+                    <StackLayout *ngIf="iadls.length > 0" col="1" row="0" class="m-t-10 m-b-10"> <!-- Has IADLs -->
+                        <StackLayout  *ngFor="let iadl of iadls" >
+                            <Label class="option-title iadl-data" [text]="iadl"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                </GridLayout>
+            </CardView>
+            <Label class="disclaimer" *ngIf="client.RegistryProvider"  textWrap="true" text="*Estimate" (loaded)="cardLoaded($event.object, 3)"></Label>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>

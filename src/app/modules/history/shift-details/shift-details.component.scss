@@ -1,0 +1,29 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.iadl-data {
+    margin-top: 5;
+    color: $primary-text;
+}
+
+.edit-button {
+    color: $link-blue;
+    text-decoration: underline;
+    margin-left: 10;
+    margin-top: 5;
+    text-align: left;
+
+    &:highlighted {
+        opacity: 0.9;
+    }
+}
+
+.whiteButton {
+    background-color: #ffffff;
+    color: $primary;
+    border-width: 1;
+    border-color: $primary;
+    width: 100;
+    height: 40;
+    margin-left: 0;
+}

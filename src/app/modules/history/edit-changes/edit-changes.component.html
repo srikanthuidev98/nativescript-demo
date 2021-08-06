@@ -1,0 +1,46 @@
+<app-action-bar backBtnText="Back" title="Verify Changes"></app-action-bar>
+<ScrollView>
+    <GridLayout class="top-layout" rows="auto, auto, auto, auto">
+        <app-edit-visit-header *ngIf="editVisit$ | async; let editVisit" [editVisit]="editVisit" [hideSkip]="true" row="0"></app-edit-visit-header>
+
+        <StackLayout row="1">
+            <app-ac-dropdown questionText="Select a reason for change?" [showError]="showError" hint="Please select" [items]="reasons" (itemSelected)="dropDownItemSelected($event)"></app-ac-dropdown>
+        </StackLayout>
+
+        <GridLayout class="table-layout" row="2" rows="auto, auto, auto, auto, auto">
+            <StackLayout col="0" colSpan="3" row="0" class="header">
+                <Label text="Updates"></Label>
+            </StackLayout>
+            <GridLayout row="1" columns="2*, *, *">
+                <Label class="title left" col="0" text="Edit"></Label>
+                <Label class="title" col="1" text="From"></Label>
+                <Label class="title" col="2" text="To"></Label>
+            </GridLayout>
+
+            <StackLayout class='hr-line' row="2"></StackLayout>
+
+            <StackLayout *ngIf="changes.length > 0" row="3">
+                <GridLayout *ngFor="let item of changes" columns="2*, *, *">
+                    <Label class="left" col="0" textWrap="true" [text]="item.key"></Label>
+                    <Label *ngIf="!item.dateType" col="1" textWrap="true" [text]="item.from"></Label>
+                    <Label *ngIf="item.dateType === 'hour'" col="1" textWrap="true" [text]="item.from | date: 'h:mma' | lowercase"></Label>
+                    <Label *ngIf="item.dateType === 'day'" col="1" textWrap="true" [text]="item.from | date: 'MMM d'"></Label>
+
+                    <Label *ngIf="!item.dateType" col="2" textWrap="true" [text]="item.to"></Label>
+                    <Label *ngIf="item.dateType === 'hour'" col="2" textWrap="true" [text]="item.to | date: 'h:mma' | lowercase"></Label>
+                    <Label *ngIf="item.dateType === 'day'" col="2" textWrap="true" [text]="item.to | date: 'MMM d'"></Label>
+                </GridLayout>
+            </StackLayout>
+            <StackLayout *ngIf="changes.length === 0" row="3">
+                <Label class="no-changes" textWrap="true" text="No changes were made"></Label>
+            </StackLayout>
+
+            <StackLayout class='hr-line m-t-5' row="4"></StackLayout>
+        </GridLayout>
+
+        <GridLayout row="3" rows="40, auto">
+            <Label *ngIf="showError" row="0" class="validation-error" textWrap="true" marginTop="10" text="Please select a reason for the change."></Label>
+            <Button class="primary-button m-b-20" [isEnabled]="changes.length > 0" row="1" text="Confirm" (tap)="confirmTap()"></Button>
+        </GridLayout>
+    </GridLayout>
+</ScrollView>

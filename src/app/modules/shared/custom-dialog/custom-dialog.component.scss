@@ -1,0 +1,58 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.dialog {
+    background-color: white;
+    border-radius: 5;
+    width: 90%;
+}
+
+.dialog-background {
+    background-color: black;
+    opacity: .7;
+}
+
+.title-layout {
+    border-top-left-radius: 5;
+    border-top-right-radius: 5;
+    padding-top: 5;
+    padding-bottom: 5;
+    color: #fff;
+    text-align: center;
+
+    .name {
+        font-size: 16;
+
+        &.titleOnly {
+            font-size: 20;
+            vertical-align: middle;
+        }
+    }
+
+    .cancel {
+        font-size: 10;
+        margin-top: -5;
+    }
+
+    .fal {
+        vertical-align: middle;
+        font-size: 18;
+        text-align: right;
+        padding-right: 30;
+    }
+}
+
+.data-layout {
+    margin: 10;
+    margin-bottom: 5;
+    font-size: 18;
+    color: $primary-text;
+}
+
+.button-layout {
+    margin-top: 30;
+    Button {
+        padding-top: 10;
+        padding-bottom: 10;
+    }
+}

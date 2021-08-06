@@ -1,0 +1,15 @@
+<app-action-bar title="Location Alert" backBtnText="Back"></app-action-bar>
+<ScrollView>
+    <StackLayout appHideKeyboard>
+        <Label class="title" textWrap="true" text="It looks like you left the clients house during this visit.&#xa;Please provide a reason for your absence."></Label>
+        <StackLayout class="hr-line" marginBottom="10"></StackLayout>
+        <StackLayout *ngIf="options$ | async; let options">
+            <StackLayout *ngFor="let option of options">
+                <app-ac-radio-button [text]="option.text" boxType="square" [error]="noOptionSelectedError" (checkTapped)="checkTap(option, $event)"></app-ac-radio-button>
+            </StackLayout>
+        </StackLayout>
+        <TextView *ngIf="showTextField.length > 0" class="textField" [class.error]="noReasonError" hint="Please provide details of your absence" (textChange)="onTextChange($event)"></TextView>
+        <Label class="validation-error" [text]="errorText"></Label>
+        <Button class="primary-button" text="Continue" (tap)="continueTap()"></Button>
+    </StackLayout>
+</ScrollView>

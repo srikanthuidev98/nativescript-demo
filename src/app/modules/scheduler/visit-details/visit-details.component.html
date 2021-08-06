@@ -1,0 +1,93 @@
+<app-action-bar backBtnText="back" title="Visit Details"></app-action-bar>
+<ScrollView #scrollview>
+    <StackLayout class="m-b-20" ios:paddingTop="2">
+        <!-- Header - Circle and Title -->
+        <GridLayout class="header-layout" rows="auto">
+            <GridLayout row="0" rows="*">
+                <Image row="0" src="res://clientbackground" height="160" stretch="fill" ></Image>
+                <ContentView class="rectangle" row="0"></ContentView>
+            </GridLayout>
+            <GridLayout row="0" rows="*, auto" columns="*, auto, *">
+                <ContentView class="circle" [class.has-picture]="testPath" row="0" col="1"></ContentView>
+                <ContentView class="inner-circle" row="0" col="1">
+                    <Image *ngIf="testPath" stretch="fill" [useCache]="false" row="0" col="1" android:height="90" android:width="90" borderRadius="300%" [src]="testPath"></Image>
+                    <Label *ngIf="!testPath" class="initals" [text]="initals"></Label>
+                </ContentView>
+                <Label row="1" col="1" [text]="visit.name"></Label>
+            </GridLayout>
+        </GridLayout>
+
+        <!-- Data - Address, phone, etc -->
+        <GridLayout class="data-layout" columns="50, *" rows="auto, auto, auto, auto, auto, auto, auto, auto, auto, auto">
+            <!-- Address -->
+            <GridLayout col="0" colSpan="2" row="0" columns="50, *" rows="auto, auto, auto">
+                <Label class="title" text="Address" col="1" row="0"></Label>
+                <Label class="fas address-icon" col="0" row="1" text="&#xf3c5;"></Label>
+                <Label class="sub-text blue" col="1" row="1" textWrap="true" [text]="address" (tap)="addressTap(address)"></Label>
+            </GridLayout>
+
+            <StackLayout class="hr-line" col="0" colSpan="2" row="1"></StackLayout>
+
+            <!-- Time -->
+            <StackLayout col="1" row="2">
+                <Label class="title" text="Time"></Label>
+                <Label class="sub-text" [text]="visit.checkInTime | date: 'EEEE, MMMM d'" marginBottom="-5"></Label>
+                <Label class="sub-text" [text]="(visit.checkInTime | date: 'shortTime') + ' - ' + (visit.checkOutTime | date: 'shortTime')"></Label>
+            </StackLayout>
+
+            <StackLayout class="hr-line" col="0" colSpan="2" row="3"></StackLayout>
+
+            <!-- Rate -->
+            <StackLayout col="1" row="4">
+                <Label class="title" text="Negotiated Rate"></Label>
+                <Label *ngIf="visit.payRateType === 1" class="sub-text" [text]="(visit.payRate | currency) + ' per hour'"></Label>
+                <Label *ngIf="visit.payRateType === 2" class="sub-text" [text]="(visit.payRate | currency) + ' per day'"></Label>
+                <Label *ngIf="visit.payRateType === 5" class="sub-text" [text]="(visit.payRate | currency) + ' per visit'"></Label>
+            </StackLayout>
+
+            <StackLayout class="hr-line" col="0" colSpan="2" row="5"></StackLayout>
+
+            <!-- Cell Phone -->
+            <GridLayout class="phone-layout" [class.no-phone]="!visit.cellPhone" col="0" colSpan="2" row="6" columns="50, *" rows="auto, auto, auto">
+                <Label class="title" text="Cell Phone" col="1" row="0"></Label>
+                <Label class="fas icon" col="0" row="1" text="&#xf3cf;"></Label>
+                <Label *ngIf="visit.cellPhone" class="sub-text" col="1" row="1" [text]="visit.cellPhone | phone" (tap)="phoneTap(visit.cellPhone)"></Label>
+                <Label *ngIf="!visit.cellPhone"class="sub-text" col="1" row="1" text="No number on file"></Label>
+            </GridLayout>
+
+            <StackLayout class="hr-line" col="0" colSpan="2" row="7"></StackLayout>
+
+            <!-- Home Phone -->
+            <GridLayout class="phone-layout" [class.no-phone]="!visit.homePhone" col="0" colSpan="2" row="8" columns="50, *" rows="auto, auto, auto">
+                <Label class="title" text="Home Phone" col="1" row="0"></Label>
+                <Label class="fas icon" col="0" row="1" text="&#xf095;"></Label>
+                <Label *ngIf="visit.homePhone" class="sub-text" col="1" row="1" [text]="visit.homePhone | phone" (tap)="phoneTap(visit.homePhone)"></Label>
+                <Label *ngIf="!visit.homePhone" class="sub-text" col="1" row="1" text="No number on file"></Label>
+            </GridLayout>
+
+            <StackLayout class="hr-line" col="0" colSpan="2" row="9"></StackLayout>
+        </GridLayout>
+
+        <!-- Check in Button -->
+        <Button *ngIf="visit.status !== 7" class="secondary-button" text="Check In" (tap)="checkInTap()"></Button>
+
+        <!-- Drop down lists -->
+        <StackLayout class="dropDown-layout">
+            <GridLayout *ngIf="visit.schedulingComment" class="title" columns="*, auto" rows="*, auto, *" (tap)="dropDownTap($event.object, 1)">
+                <Label class="purple" text="Scheduling Comment" row="1"></Label>
+                <Label [class.up]="commentDdOpen" [class.down]="!commentDdOpen" class="fal dropdown-chervon" row="1" col="1" text="&#xf078;"></Label>
+            </GridLayout>
+            <StackLayout *ngIf="commentDdOpen" class="data">
+                <Label class="comment" textWrap="true" [text]="visit.schedulingComment"></Label>
+            </StackLayout>
+
+            <GridLayout class="title" columns="*, auto" rows="*, auto, *" (tap)="dropDownTap($event.object, 2)">
+                <Label class="purple" text="Requested Services" row="1"></Label>
+                <Label [class.up]="servicesDdOpen" [class.down]="!servicesDdOpen" class="fal dropdown-chervon" row="1" col="1" text="&#xf078;"></Label>
+            </GridLayout>
+            <StackLayout *ngIf="servicesDdOpen" paddingTop="-15" class="data">
+                <app-calendar-services [tasks]="visit.tasks"></app-calendar-services>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>

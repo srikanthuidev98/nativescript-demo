@@ -1,0 +1,4 @@
+<GridLayout class="layout" [class.error]="error" columns="auto, auto" (tap)="layoutTapped()">
+    <CheckBox #checkBox ios:width="10" isUserInteractionEnabled="false" height="20" col="0" onCheckColor="white" ios:scaleX="1.2" ios:scaleY="1.2" [boxType]="boxType" fillColor="#593c81"></CheckBox>
+    <Label class="text" col="1" ios:marginTop="3" [text]="text"></Label>
+</GridLayout>

@@ -1,0 +1,27 @@
+{
+    "LOGIN": {
+        "EMAIL": "Email",
+        "PASSWORD": "Contraseña",
+        "REMEMBEREMAIL": "Recuerda email",
+        "LOGIN": "Iniciar sesión",
+        "FORGOTPASSWORD": "Olvidé mi contraseña"
+    },
+
+    "SIGNATURE": {
+
+        "HEADERTITLE": "Firma",
+        "TITLE": "Firma Electrónica",
+        "INSTRUCTIONS": "Antes de firmar, lea la advertencia para el estado donde reside y para el estado donde se emitió la póliza de seguro bajo la cual está reclamando un beneficio.",
+        "FRAUDTITLE": "Declaración de fraude",
+        "FRAUDSTATEMENT": "Marcador",
+        "SELECTNAME": "Seleccione su nombre",
+        "CERTIFY": "Certifico que la información anterior es verdadera y correcta",
+        "CLEARBTN": "Claro",
+        "AGREE": "De acuerdo",
+        "DISAGREE": "No estoy de acuerdo",
+        "APPROVEBTN": "Apruebo esta visita"
+
+    }
+
+
+}

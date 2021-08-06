@@ -1,0 +1,20 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+GridLayout {
+    background-color: $primary-text;
+
+    Label {
+        color: #ffffff;
+        font-size: 20;
+        margin-top: 5;
+        margin-bottom: 5;
+        margin-left: 20;
+        margin-right: 20;
+    }
+}
+
+.image {
+    text-align: center;
+    vertical-align: middle;
+}

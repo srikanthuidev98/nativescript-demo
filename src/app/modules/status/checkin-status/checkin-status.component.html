@@ -1,0 +1,64 @@
+<app-action-bar [showMessageBubble]="true" [dialogOpen]="dialogOpen"></app-action-bar>
+<GridLayout rows="*">
+    <ScrollView #scroll row="0">
+        <StackLayout>
+            <Label class="main-header" textWrap="true" [text]="header"></Label>
+            <Label *ngIf="headerName" class="name-header" textWrap="true" [text]="headerName"></Label>
+
+            <StackLayout *ngIf="!nextVisit">
+                <Button text="Check In" (tap)="checkInTap()" class="secondary-button"></Button>
+                <StackLayout class="hr-line border break"></StackLayout>
+                <!-- <Label class="header" text="Status"></Label>
+                <Label class="status" textWrap="true">
+                    <FormattedString>
+                        <Span text="You are currently "></Span>
+                        <Span text="Checked Out" class="status-bold"></Span>
+                    </FormattedString>
+                </Label>
+                <StackLayout class="hr-line border break"></StackLayout> -->
+            </StackLayout>
+
+            <!-- Next Visit -->
+            <StackLayout *ngIf="nextVisit">
+                <Label class="header" text="Next Visit"></Label>
+                <app-calendar-card [visit]="nextVisit"></app-calendar-card>
+                <StackLayout class="hr-line border break"></StackLayout>
+            </StackLayout>
+
+            <!-- Notifications -->
+            <Label class="header" text="Notifications"></Label>
+            <StackLayout *ngIf="clients$ | async; let clients;">
+                <app-notification-card *ngIf="checkinMessage" [html]="checkinMessage"></app-notification-card>
+            </StackLayout>
+            <app-notification-card *ngIf="!(connection.hasInternet$ | async)" [notification]="offlineNotification"></app-notification-card>
+            <Label *ngIf="(connection.hasInternet$ | async) && noNotifications" class="status" textWrap="true" text="No notifications at this time"></Label>
+            <StackLayout class="hr-line border break"></StackLayout>
+
+            <!-- Upcoming Visits -->
+            <StackLayout *ngIf="upcomingVisits.length > 0">
+                <Label class="header" text="Upcoming Visits"></Label>
+                <StackLayout *ngFor="let visit of upcomingVisits">
+                    <app-calendar-card (cancelledDetailTapped)="cancelledDetailTap($event)" [visit]="visit"></app-calendar-card>
+                </StackLayout>
+                <GridLayout columns="auto, *">
+                    <Button class="borderless-button" cool="0" text="Go to My Schedule" (tap)="scheduleTap()"></Button>
+                </GridLayout>
+                <StackLayout class="hr-line border break"></StackLayout>
+            </StackLayout>
+
+            <!-- CheckIn Button with text -->
+            <StackLayout *ngIf="nextVisit">
+                <Label class="checkin-text" textWrap="true" text="To begin an unscheduled visit press the button below and select the appropriate client and rate."></Label>
+                <Button text="Check In" (tap)="checkInTap()" class="secondary-button"></Button>
+                <StackLayout class="hr-line border break"></StackLayout>
+            </StackLayout>
+
+            <!-- Last Visit -->
+            <StackLayout *ngIf="lastVisit$ | async; let lastVisit">
+                <Label class="header m-b-10" text="Last visit"></Label>
+                <app-shift [dualClient]="lastVisit.DualClient" [visit]="lastVisit.Visit" [slideInIndex]="2"></app-shift>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+    <app-custom-dialog *ngIf="dialogOpen" [data]="dialogData" row="0" rowSpan="2" (dialogClosed)="closeDialog($event)"></app-custom-dialog>
+</GridLayout>

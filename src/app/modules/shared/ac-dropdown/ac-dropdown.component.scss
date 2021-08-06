@@ -1,0 +1,50 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.dropdown-layout {
+    margin-top: 10;
+    margin-bottom: 10;
+
+    Label {
+        color: $primary-text;
+        font-size: 18;
+        margin-left: 10;
+        margin-bottom: 5;
+    }
+
+    .dropdown-box {
+        color: $primary-text;
+        font-size: 18;
+        background-color: #ffffff;
+        border-color: $border;
+        border-width: 1;
+        border-radius: 2;
+        padding: 10;
+        padding-left: 7;
+        height: 50;
+        margin-left: 11;
+        margin-right: 15;
+        placeholder-color: #b1b1b1;
+
+        &.notEditable {
+            color: #8a8a8a;
+            background-color: #f8f8f8;
+        }
+
+        &.error {
+            border-color: $error;
+            placeholder-color: $error;
+        }
+    }
+
+    .chevron {
+        color: #828282;
+        font-size: 18;
+        text-align: center;
+        margin-right: 30;
+
+        &.error {
+            color: $error;
+        }
+    }
+}

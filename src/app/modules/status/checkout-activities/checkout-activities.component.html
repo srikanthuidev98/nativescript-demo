@@ -1,0 +1,116 @@
+<app-action-bar backBtnText="Back" [title]="title"></app-action-bar>
+<ScrollView #scrollview appHideKeyboard>
+    <StackLayout>
+        <!-- Regular Page -->
+        <StackLayout *ngIf="!isEditVisitPage">
+            <Label class="top-name" [text]="'Client: ' + client.Name"></Label>
+            <Label class="top-label" textWrap="true" [text]="titleSubText"></Label>
+        </StackLayout>
+
+        <StackLayout *ngIf="hasScheduledServices">
+            <GridLayout *ngIf="!isEditVisitPage && hasScheduledServices" columns="*, auto" height="60"> <!-- Activites block-->
+                <StackLayout col="0" class="header">
+                    <Label text="Requested Services"></Label>
+                </StackLayout>
+                <StackLayout *ngIf="allowEditingShift" col="1" class="header">
+                    <Button text="&#xf044;" class="fas header-edit" ios:marginRight="15" [color]="editRows[1]" (tap)="editTap(1)"></Button>
+                </StackLayout>
+            </GridLayout>
+            <GridLayout *ngFor="let task of client.ScheduleServices; index as i" rows="*, 2" columns="10, *, auto, 10">
+                <GridLayout row="0" col="1" class="verCenter activities-title" rows="auto, auto">
+                    <Label *ngIf="!task.isRequired" class="color-change" row="0" textWrap="true" [text]="task.task"></Label>
+                    <Label *ngIf="task.isRequired" class="color-change required" textWrap="true" row="0" [text]="'* ' + task.task"></Label>
+                    <Label *ngIf="task.frequency" class="frequency" row="1" textWrap="true" [text]="task.frequency"></Label>
+                </GridLayout>
+                <StackLayout row="0" col="2" >
+                    <Button class="activities-option borderless-button" textAlignment="right" [isEnabled]="enableEdit(1)" [text]="requestedServices[i].ValueString" (tap)="requestedServiceTap(task.task, i)"></Button>
+                </StackLayout>
+                <StackLayout row="1" col="1" colSpan="2" class="hr-line"></StackLayout>
+            </GridLayout>
+            <Label *ngIf="showRequiredtaskLabel" class="required-label" text="* Required tasks"></Label>
+        </StackLayout>
+
+        <!-- EditVisit -->
+        <app-edit-visit-header *ngIf="editVisit$ | async; let editVisit" [editVisit]="editVisit" (skip)="saveTap()"></app-edit-visit-header>
+
+        <GridLayout columns="*, auto" height="60"> <!-- Activites block-->
+            <StackLayout col="0" class="header">
+                <Label text="Activities of Daily Living"></Label>
+            </StackLayout>
+            <StackLayout *ngIf="allowEditingShift" col="1" class="header">
+                <Button text="&#xf044;" class="fas header-edit" ios:marginRight="15" [color]="editRows[1]" (tap)="editTap(1)"></Button>
+            </StackLayout>
+        </GridLayout>
+        <GridLayout *ngFor="let adl of ADLs; index as i" rows="*, 2" columns="10, *, *, 10">
+            <StackLayout *ngIf="!adl.Hide" row="0" col="1" class="verCenter activities-title">
+                <Label class="color-change" [class.changed]="changedADLs[i]" [text]="adl.Title"></Label>
+            </StackLayout>
+            <StackLayout *ngIf="!adl.Hide" row="0" col="2" class="verCenter">
+                <Button class="activities-option borderless-button" textAlignment="right" [isEnabled]="enableEdit(1)" [text]="adl.ValueString" (tap)="adlOptionTap(adl, i)"></Button>
+            </StackLayout>
+            <StackLayout *ngIf="!adl.Hide" row="1" col="1" colSpan="2" class="hr-line"></StackLayout>
+        </GridLayout>
+
+        <GridLayout columns="*, auto" height="60"> <!-- Other Activites block-->
+            <StackLayout col="0" class="header">
+                <Label text="Other Activities"></Label>
+            </StackLayout>
+            <StackLayout *ngIf="allowEditingShift" col="1" class="header">
+                <Button text="&#xf044;" class="fas header-edit" ios:marginRight="15" [color]="editRows[2]" (tap)="editTap(2)"></Button>
+            </StackLayout>
+        </GridLayout>
+        <GridLayout *ngFor="let iadl of IADLs; index as i" rows="*, 2" columns="10, *2, *, 10">
+            <StackLayout *ngIf="!iadl.Hide" row="0" col="1" class="verCenter activities-title">
+                <Label class="color-change" [class.changed]="changedIADLs[i]" row="0" col="1" [text]="iadl.Title"></Label>
+            </StackLayout>
+            <Switch *ngIf="!iadl.Hide" (checkedChange)="onCheckedChange($event, iadl, i)" (tap)="onCheckedTap(iadl, i)" android:marginTop="20" [checked]="iadl.Value === 1" class="activities-switch" android:scaleX="1.1" android:scaleY="1.1" [isEnabled]="enableEdit(2)" row="0" col="2"></Switch>
+            <StackLayout *ngIf="!iadl.Hide" row="1" col="1" colSpan="2" class="hr-line"></StackLayout>
+        </GridLayout>
+
+        <GridLayout *ngIf="client.ReimbursesMileage" columns="*, auto" height="60"> <!-- Mileage block-->
+            <StackLayout col="0" class="header">
+                <Label text="Mileage"></Label>
+            </StackLayout>
+            <StackLayout *ngIf="allowEditingShift" col="1" class="header">
+                <Button text="&#xf044;" class="fas header-edit" ios:marginRight="15" [color]="editRows[3]" (tap)="editTap(3)"></Button>
+            </StackLayout>
+        </GridLayout>
+        <GridLayout rows="auto, auto" *ngIf="client.ReimbursesMileage">
+            <StackLayout row="0" class="activities-title">
+                <Label textWrap="true" text="Please enter mileage if authorized by Client"></Label>
+            </StackLayout>
+            <GridLayout row="1" columns="auto, auto, *" rows="10, auto">
+                <StackLayout col="0" row="0" rowSpan="2" class="activities-title m-b-30" height="40">
+                    <Label class="color-change" [class.changed]="changedMileage" text="Mileage"></Label>
+                </StackLayout>
+                <TextField [(ngModel)]='mileage' col="1" row="1" class="mileage color-change" [class.changed]="changedMileage" [borderColor]="editTextFieldColors[3]" [editable]="enableEdit(3)" returnKeyType="done" hint="0" keyboardType="phone" autocorrect="false" (textChange)="mileageChanged($event)"></TextField>
+            </GridLayout>
+        </GridLayout>
+
+        <!-- Additional Information block-->
+        <!-- <GridLayout *ngIf="client.Questions"  columns="*, auto" height="60">
+            <StackLayout col="0" class="header">
+                <Label text="Additional Information"></Label>
+            </StackLayout>
+            <StackLayout *ngIf="allowEditingShift" col="1" class="header">
+                <Button text="&#xf044;" class="fas header-edit" ios:marginRight="15" [color]="editRows[4]" (tap)="editTap(4)"></Button>
+            </StackLayout>
+        </GridLayout>
+        <StackLayout *ngFor="let question of client.Questions">
+            <app-question [question]="question" [editable]="enableEdit(4)"></app-question>
+            <StackLayout class="hr-line"></StackLayout>
+        </StackLayout> -->
+
+        <Label *ngIf="errorText" class="validation-error" marginTop="10" [text]="errorText"></Label>
+
+        <!-- Regular Page -->
+        <Button *ngIf="!isEditVisitPage" class="primary-button" [text]="continueBtnText" (tap)="checkoutTap()"></Button>
+
+        <!-- EditVisit -->
+        <GridLayout *ngIf="isEditVisitPage" class="double-button-layout" marginTop="0" rows="auto, auto" columns="*, *">
+            <StackLayout class="hr-line m-t-10 m-b-10" row="0" col="0" colSpan="2"></StackLayout>
+            <Button class="whiteButton" row="1" col="0" text="Revert" (tap)="resetTap()"></Button>
+            <Button col="1" row="1" text="Save" (tap)="saveTap(true)"></Button>
+        </GridLayout>
+    </StackLayout>
+</ScrollView>

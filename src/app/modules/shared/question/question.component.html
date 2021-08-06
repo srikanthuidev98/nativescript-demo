@@ -1,0 +1,51 @@
+<StackLayout class="question-layout" [ngSwitch]="question.type">
+    <GridLayout *ngSwitchCase="questionType.YesNo" rows="auto, auto">
+        <Label class="verCenter" [class.error]="question.showError" row="0" textWrap="true" [text]="question.text"></Label>
+        <GridLayout class="button-layout" columns="*, auto, auto" row="1">
+            <StackLayout  col="1">
+                <app-ac-radio-button #radioYes text="Yes" (checkTapped)="onCheckTapped('yes', $event)"></app-ac-radio-button>
+            </StackLayout>
+            <StackLayout col="2" marginRight="30">
+                <app-ac-radio-button #radioNo text="No" (checkTapped)="onCheckTapped('no', $event)"></app-ac-radio-button>
+            </StackLayout>
+            <!-- <Button [class.selected]="yesNoSelected === 'no'" [isEnabled]="editable" text="No" (tap)="yesNoTap('no')"></Button>
+            <Button [class.selected]="yesNoSelected === 'yes'" [isEnabled]="editable" text="Yes" (tap)="yesNoTap('yes')"></Button> -->
+        </GridLayout>
+    </GridLayout>
+
+    <GridLayout *ngSwitchCase="questionType.YesNoYesExtra" rows="auto, auto, auto">
+        <Label class="verCenter" [class.error]="question.showError" row="0" textWrap="true" [text]="question.text"></Label>
+        <StackLayout class="button-layout" row="1" orientation="horizontal">
+            <app-ac-radio-button #radioYes text="Yes" (checkTapped)="onCheckTapped('yes', $event)"></app-ac-radio-button>
+            <app-ac-radio-button #radioNo text="No" (checkTapped)="onCheckTapped('no', $event)"></app-ac-radio-button>
+            <!-- <Button [class.selected]="yesNoSelected === 'no'" [isEnabled]="editable" text="No" (tap)="yesNoTap('no')"></Button>
+            <Button [class.selected]="yesNoSelected === 'yes'" [isEnabled]="editable" text="Yes" (tap)="yesNoTap('yes')"></Button> -->
+        </StackLayout>
+        <TextView *ngIf="yesNoSelected === 'yes'" [class.notEditable]="!editable" [editable]="editable" [text]="startingText" [hint]="question.hint" row="2" (textChange)="onTextChange($event)"></TextView>
+    </GridLayout>
+
+    <GridLayout *ngSwitchCase="questionType.YesNoNoExtra" rows="auto, auto, auto">
+        <Label class="verCenter" [class.error]="question.showError" row="0" textWrap="true" [text]="question.text"></Label>
+        <StackLayout class="button-layout" row="1" orientation="horizontal">
+            <app-ac-radio-button #radioYes text="Yes" (checkTapped)="onCheckTapped('yes', $event)"></app-ac-radio-button>
+            <app-ac-radio-button #radioNo text="No" (checkTapped)="onCheckTapped('no', $event)"></app-ac-radio-button>
+            <!-- <Button [class.selected]="yesNoSelected === 'no'" [isEnabled]="editable" text="No" (tap)="yesNoTap('no')"></Button>
+            <Button [class.selected]="yesNoSelected === 'yes'" [isEnabled]="editable" text="Yes" (tap)="yesNoTap('yes')"></Button> -->
+        </StackLayout>
+        <TextView *ngIf="yesNoSelected === 'no'" [class.notEditable]="!editable" [editable]="editable" [text]="startingText" [hint]="question.hint" row="2" (textChange)="onTextChange($event)"></TextView>
+    </GridLayout>
+
+    <GridLayout *ngSwitchCase="questionType.FreeText" rows="*, auto">
+        <Label class="verCenter" [class.error]="question.showError" row="0" textWrap="true" [text]="question.text"></Label>
+        <TextView minHeight="100" [text]="startingText" [class.notEditable]="!editable" [editable]="editable" [hint]="question.hint" row="1" (textChange)="onTextChange($event)"></TextView>
+    </GridLayout>
+
+    <GridLayout *ngSwitchCase="questionType.Switch" columns="*, auto">
+        <Label class="verCenter" col="0" textWrap="true" [text]="question.text"></Label>
+        <Switch class="m-l-20" col="1" [checked]="switchOn" [isEnabled]="editable" (checkedChange)="onCheckedChange($event)"></Switch>
+    </GridLayout>
+
+    <StackLayout *ngSwitchCase="questionType.DropDown" class="m-t-10 m-b-10">
+        <app-ac-dropdown [questionText]="question.text" [showError]="question.showError" [selectedIndex]="selectedIndex" [hint]="question.hint" [items]="dropDownItems" [editable]="editable" (itemSelected)="dropDownItemSelected($event)"></app-ac-dropdown>
+    </StackLayout>
+</StackLayout>

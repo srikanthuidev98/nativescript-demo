@@ -1,0 +1,25 @@
+<app-action-bar [backBtnText]="from" [title]="title"></app-action-bar>
+<ScrollView>
+    <StackLayout>
+        <Image src="res://contactus"></Image>
+        
+        <!-- Delete this when we have FAQ Questions -->
+        <StackLayout class="center">
+            <Label class="no-faq" textWrap="true" text="Any comments or suggestions?" marginBottom="-10"></Label>
+            <Label class="no-faq" textWrap="true" text="We would love to hear from you!"></Label>
+        </StackLayout>
+
+
+        <!-- <StackLayout class="center">
+            <Label class="title" textWrap="true" text="Get answers to some of our most"></Label>
+        </StackLayout>
+        <Button class="borderless-button title-btn" text="Frequently Asked Questions" (tap)="faqTap()"></Button>
+
+        <StackLayout class="center">
+            <Label class="or-title" text="Or"></Label>
+        </StackLayout> -->
+        
+        <Button class="primary-button" text="Call Us" (tap)="phoneTap()"></Button>
+        <Button class="primary-button" text="Email Us" (tap)="emailTap()"></Button>
+    </StackLayout>
+</ScrollView>

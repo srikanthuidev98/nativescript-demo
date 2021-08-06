@@ -1,0 +1,20 @@
+<app-action-bar backBtnText="Back" title="History"></app-action-bar>
+<GridLayout rows="*">
+    <PullToRefresh *ngIf="payrolls.length > 0" row="0" (refresh)="refreshList($event)" color="#593c81">
+        <ListView [items]="payrolls" (itemTap)="historyTap($event)" [itemTemplateSelector]="templateSelector" class="list-group">
+            <ng-template nsTemplateKey="year" let-history="item" let-i="index" let-odd="odd" let-even="even">
+                <GridLayout class="year" columns="*, auto, *">
+                    <Label col="1" [text]="history"></Label>
+                </GridLayout>
+            </ng-template>
+
+            <ng-template nsTemplateKey="payroll" let-history="item" let-i="index" let-odd="odd" let-even="even">
+                <GridLayout rows="*" columns="4*, *" class="list-group-item">
+                    <Label row="0" col="0" class="p-l-15" [text]="(history.PeriodStartDate | date: 'MMMM d') + ' - ' + (history.PeriodEndDate | date: 'MMMM d')"></Label>
+                    <Label row="0" col="1" class="chevron-copy fas" text="&#xf054;"></Label>
+                </GridLayout>
+            </ng-template>
+        </ListView>
+    </PullToRefresh>
+    <Label *ngIf="payrolls.length === 0" row="0" textWrap="true" class="no-shift-label" text="No historical visits yet"></Label>
+</GridLayout>

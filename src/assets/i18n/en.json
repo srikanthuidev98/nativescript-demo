@@ -1,0 +1,44 @@
+{
+    "LOGIN": {
+        "EMAIL": "Email",
+        "PASSWORD": "Password",
+        "REMEMBEREMAIL": "Remember Email",
+        "LOGIN": "Sign In",
+        "FORGOTPASSWORD": "Forgot my password"
+    },
+    "ALERT": {
+        "PERMISSION": {
+            "IOS": {
+                "AUDIO": "Please give AssuriCare permissions to use Microphone in order to continue (System Settings -> AssuriCare -> Microphone - Enable)",
+                "CAMERA": "Please give AssuriCare permissions to use the Camera in order to take a picture. (System Settings -> AssuriCare -> Camera - Enable)",
+                "PHOTO": "Please give AssuriCare permissions to use Photos in order to upload a picture (System Settings -> AssuriCare -> Photos -> Read and Write)",
+                "LOCATION": "Please give AssuriCare permission to always use location services. (System Settings -> AssuriCare -> Location -> Always)",
+                "NOTIFICATION": "To get the best experience, please consider turning on notifications. (System Settings -> AssuriCare -> Notifications -> Allow Notifications)"
+            },
+            "ANDROID": {
+                "AUDIO": "Please give AssuriCare permissions to use Microphone in order to continue.",
+                "CAMERA": "Please enable Camera to upload a picture.",
+                "PHOTO": "Please enable Photos to upload a picture.",
+                "LOCATION": "Please give AssuriCare permission to always use location services.",
+                "NOTIFICATION": "To get the best experience, please consider turning on notifications."
+            }
+        }
+    },
+
+    "SIGNATURE": {
+
+        "HEADERTITLE": "Signature",
+        "TITLE": "Electronic Signature",
+        "INSTRUCTIONS": "Before signing, please read the warning for the state where you reside and for the sate where the insurance policy under which you are claming a benifit was issued.",
+        "FRAUDTITLE": "Fraud Statement",
+        "FRAUDSTATEMENT": "Placeholder",
+        "SELECTNAME": "Select Your Name",
+        "CERTIFY": "I certify that the above information is true and correct",
+        "CLEARBTN": "Clear",
+        "AGREE": "I agree",
+        "DISAGREE": "I disagree",
+        "APPROVEBTN": "Approve",
+        "SIGN": "Sign"
+
+    }
+}

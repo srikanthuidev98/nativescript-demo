@@ -1,0 +1,45 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.title {
+    color: $primary-text;
+    font-size: 20;
+    margin: 20;
+    margin-bottom: 10;
+}
+
+.box {
+    border-width: 1;
+    border-color: $primary;
+    margin: 10;
+    margin-bottom: 0;
+    background-color: $primary;
+    border-radius: 3;
+    color: #ffffff;
+}
+
+.answer-box {
+    @extend .box;
+    border-color: $border;
+    background-color: #ffffff;
+    color: $secondary-text;
+    margin: 0;
+}
+
+.question {
+    margin: 10;
+    font-size: 16;
+}
+
+.answer {
+    margin: 10;
+    font-size: 16;
+}
+
+.dot {
+    color: $primary;
+    font-size: 26;
+    margin-left: 8;
+    margin-top: 2;
+    vertical-align: top;
+}

@@ -1,0 +1,16 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.layout {
+    &.error {
+        Label {
+            color: $error;
+        }
+    }
+}
+
+.text {
+    color: $primary-text;
+    font-size: 20;
+    vertical-align: middle;
+}

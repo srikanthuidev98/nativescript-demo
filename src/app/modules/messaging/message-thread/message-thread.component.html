@@ -1,0 +1,70 @@
+<app-action-bar title="Messages"></app-action-bar>
+<AbsoluteLayout>
+    <GridLayout *ngIf="threads$ | async; let threads" rows="auto, *, auto" width="100%" height="100%">
+        <GridLayout class="unread-layout" row="0" rows="auto, auto" columns="*, auto, auto">
+            <Label col="1" row="0" [text]="(unreadMessages$ | async) + ' Unread messages'"></Label>
+            <Button class="far borderless-button trash" row="0" col="2" text="&#xf2ed;" (tap)="trashIconTap()"></Button>
+            <StackLayout class="hr-line" col="0" colSpan="3" row="1"></StackLayout>
+        </GridLayout>
+        <GridLayout *ngIf="!(loading$ | async) && threads.length === 0" class="no-messages-layout" row="1" rows="auto, auto">
+            <Label class="fal" row="0" text="&#xf4b3;"></Label>
+            <Label row="1" textWrap="true" text="No messages at this time."></Label>
+        </GridLayout>
+        <PullToRefresh row="1" (refresh)="refreshList($event)" color="#593c81" iosOverflowSafeArea="false">
+            <ListView #listview [visibility]="threads.length > 0 ? 'visible' : 'collapsed'" class='message-layout' [items]="threads" separatorColor="transparent">
+                <ng-template let-thread="item" let-i="index">
+                    <GridLayout class="list-layout" [class.first]="i === 0" columns="auto, *, auto" rows="auto, auto" (tap)="threadTap(thread, i)">
+                        <ContentView col="0" row="0" class="initals-circle" [class.selected]="selectedForDeletion.length > 0 && selectedForDeletion[i]">
+                            <Label *ngIf="!deleteSelection" class="initals" [text]="getInitials(getDisplayName(thread))"></Label>
+                            <Label *ngIf="deleteSelection && selectedForDeletion[i]" class="far initals" [class.selected]="true" text="&#xf00c;"></Label>
+                        </ContentView>
+
+                        <GridLayout col="1" row="0" rows="auto, auto">
+                            <GridLayout row="0" columns="auto, auto">
+                                <Label class="name" col="0" [text]="getDisplayName(thread)"></Label>
+                                <Label *ngIf="thread.unreadMessageCount > 0" col="1" class="message-bubble" [text]="thread.unreadMessageCount"></Label>
+                            </GridLayout>
+                            <Label class="content" row="1" [text]="thread.content"></Label>
+                        </GridLayout>
+
+                        <Label class="time" row="0" col="2" [text]="thread.updatedWhen | date: getDateFormat(thread.updatedWhen)"></Label>
+
+                        <StackLayout class="hr-line" marginTop="15" col="0" colSpan="3" row="1"></StackLayout>
+                    </GridLayout>
+                </ng-template>
+            </ListView>
+        </PullToRefresh>
+
+        <Button *ngIf="deleteSelection" class="primary-button-disabled" row="2" [isEnabled]="enableDeleteButton" text="Delete" (tap)="deleteThreadTap()"></Button>
+    </GridLayout>
+    <GridLayout #fab [visibility]="!deleteSelection ? 'visible' : 'collapsed'" class="button-fab" rows="*, auto, *" columns="*, auto, *" (tap)="fabTap(false)" iosOverflowSafeArea="false">
+        <Label #fabPlus class="fas actions" row="1" col="1" text="&#xf4ad;"></Label>
+
+        <GridLayout #modal class="modal" row="0" rowSpan="3" col="0" colSpan="3" rows="60, *">
+            <GridLayout class="header" columns="*, 60">
+                <Button class="borderless-button" col="0" [text]="groupText" (tap)="groupTap()"></Button>
+                <Button *ngIf="modalOpen" class="borderless-button fal" col="1" (tap)="fabTap(true)" text="&#xf00d;"></Button>
+            </GridLayout>
+            <GridLayout row="1" rows="*, auto" backgroundColor="#ffffff">
+                <ScrollView>
+                    <StackLayout *ngIf="recipients$ | async; let recipients" row="0">
+                        <GridLayout *ngFor="let recipient of recipients; let i = index" height="60" columns="auto, *, auto" rows="*, auto" (tap)="recipientTap(recipient, i)">
+                            <ContentView row="0" col="0" class="initals-circle" [class.selected]="selectedRecipients[i].selected">
+                                <Label *ngIf="!selectedRecipients[i].selected" class="initals" [text]="getInitials(recipient.name)"></Label>
+                                <Label *ngIf="selectedRecipients[i].selected" class="far initals" [class.selected]="true" text="&#xf00c;"></Label>
+                            </ContentView>
+                            <Label class="name verCenter" col="1" row="0" fontSize="22" [text]="recipient.name"></Label>
+                            <StackLayout col="2" row="0">
+                                <CheckBox *ngIf="isGroupSelection" class="checkBox" onCheckColor="white" android:marginTop="14" android:marginRight="15" fontSize="22" isUserInteractionEnabled="false" boxType="circle" (loaded)="checkboxLoaded($event)" ios:fillColor="#038424" android:fillColor="#593c81"></CheckBox>
+                            </StackLayout>
+                            <StackLayout class="hr-line" col="0" colSpan="3" row="1"></StackLayout>
+                        </GridLayout>
+                    </StackLayout>
+                </ScrollView>
+                <StackLayout row="1" android:height="30%" ios:height="20%">
+                    <Button *ngIf="isGroupSelection" class="primary-button-disabled" android:marginBottom="20" [isEnabled]="enableContinueButton" text="Continue" (tap)="continueNewGroupTap()"></Button>
+                </StackLayout>
+            </GridLayout>
+        </GridLayout>
+    </GridLayout>
+</AbsoluteLayout>

@@ -1,0 +1,146 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.list-row {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.message-layout {
+    background-color: #ffffff;
+
+
+    Label {
+        border-radius: 8;
+        padding: 10;
+        margin-top: 0;
+    }
+
+    .date-split {
+        font-size: 16;
+        font-weight: 500;
+        color: $primary-text;
+        text-align: center;
+    }
+
+    .time {
+        font-size: 14;
+        color: $primary-text;
+    }
+
+    .sent {
+        color: #ffffff;
+        background-color: $primary;
+    }
+
+    .received {
+        color: $primary-text;
+        background-color: $dividing-lines;
+    }
+
+    .picture-sent {
+        margin-left: 10;
+        height: 150;
+    }
+
+    .picture-received {
+        margin-left: 10;
+        margin-right: 90;
+        height: 150;
+    }
+
+    .loading-general {
+        border-width: 0.5;
+        border-color: $secondary-text;
+        border-radius: 3;
+        height: 150;
+        vertical-align: middle;
+
+        Label {
+            padding: 0;
+            text-align: center;
+        }
+    }
+
+    .loading-layout-sent {
+        @extend .loading-general;
+    }
+
+    .attachment-sent {
+        @extend .loading-general;
+
+        margin-left: 10;
+        height: 50;
+
+        Label {
+            text-align: left;
+            margin-left: 15;
+            color: $link-blue;
+        }
+
+        .fal {
+            font-size: 20;
+            margin-left: 20;
+        }
+    }
+
+    .loading-layout-received {
+        @extend .loading-general;
+
+        margin-left: 10;
+        margin-right: 90;
+    }
+
+    .attachment-received {
+        @extend .loading-general;
+
+        margin-left: 10;
+        margin-right: 90;
+        height: 50;
+
+        Label {
+            text-align: left;
+            margin-right: 15;
+            color: $link-blue;
+        }
+
+        .fal {
+            font-size: 20;
+            margin-left: 20;
+        }
+    }
+}
+
+.control-layout {
+    background-color: $primary;
+
+    Button {
+        font-size: 24;
+        width: 30;
+        color: #ffffff;
+        vertical-align: bottom;
+        margin-top: 2;
+        margin-bottom: 2;
+        margin-right: 5;
+        margin-left: 5;
+    }
+
+    TextView {
+        color: $primary-text;
+        background-color: #ffffff;
+        font-size: 18;
+        border-color: $border;
+        border-radius: 5;
+        min-height: 38;
+        padding-left: 5;
+        margin-right: 2;
+        margin-left: 2;
+        placeholder-color: #b1b1b1;
+
+        &.noControls {
+            margin-left: 10;
+        }
+    }
+}

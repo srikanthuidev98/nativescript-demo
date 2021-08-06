@@ -1,0 +1,18 @@
+<app-action-bar backBtnText="Back" title="Frequently asked questions"></app-action-bar>
+<ScrollView>
+    <StackLayout class="p-b-20">
+        <StackLayout class="center title">
+            <Label textWrap="true" text="Get answers to some of our most frequently asked questions below"></Label>
+        </StackLayout>
+        <GridLayout *ngFor="let question of questions; let i = index" class="box" rows="auto, auto" columns="*, auto">
+            <Label class="question" textWrap="true" row="0" col="0" [text]="question.q"></Label>
+            <StackLayout class="center" row="0" col="2" (tap)="extendTap(i)">
+                <Label [class.up]="questions[i].show" [class.down]="!questions[i].show" class="fas dropdown-chervon" text="&#xf078;"></Label>
+            </StackLayout>
+            <GridLayout *ngIf="questions[i].show" class="answer-box" rows="auto, *" columns="auto, *" row="1" col="0" colSpan="2">
+                <Label class="dot" row="0" col="0" [text]="dot"></Label>
+                <Label class="answer" row="0" col="1" rowSpan="2" textWrap="true" [text]="question.a"></Label>
+            </GridLayout>
+        </GridLayout>
+    </StackLayout>
+</ScrollView>

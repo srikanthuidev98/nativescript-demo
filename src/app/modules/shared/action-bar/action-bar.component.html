@@ -1,0 +1,27 @@
+<ActionBar backgroundColor="#ffffff" title="" class="action-bar">
+    <!-- Android Menu -->
+    <NavigationButton *ngIf="!backBtnText" ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+
+    <!-- iOS Menu -->
+    <ActionItem *ngIf="!backBtnText" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left">
+        <Button class="fas hamburger" text="&#xf0c9;"></Button>
+    </ActionItem>
+
+    <!-- Android & iOS Back Button -->
+    <NavigationButton *ngIf="backBtnText" android:icon="res://arrow" (tap)="onAndroidBack()"></NavigationButton>
+
+    <!-- Title -->
+    <StackLayout class="center">
+        <Label *ngIf="title" class="title" [text]="title" [color]="titleColor" (tap)="onTitleTapped()"></Label>
+        <Image *ngIf="!title" height="50" android:marginTop="7" stretch="aspectFit"  src="res://assuricarelogopurple"></Image>
+    </StackLayout>
+
+    <!-- Right button for calendar -->
+    <ActionItem *ngIf="showCalendar" (tap)="onCalendarTap()" ios.position="right">
+        <Button class="fal calendar" text="&#xf783;" android:paddingRight="15" backgroundColor="#ffffff"></Button>
+    </ActionItem>
+
+    <ActionItem *ngIf="showMessageBubble && (messagingEnabled$ | async)" class="message-layout" (tap)="onMessageTap()" ios.position="right">
+        <Button class="fas" [class.off]="(unreadMessages$ | async) === 0" row="0" text="&#xf075;" android:paddingRight="15" backgroundColor="#ffffff"></Button>
+    </ActionItem>
+</ActionBar>

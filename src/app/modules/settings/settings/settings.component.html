@@ -1,0 +1,43 @@
+<app-action-bar title="Settings"></app-action-bar>
+<ScrollView>
+    <StackLayout>
+
+        <Label class="border title" text="Help & Feedback"></Label>
+        <StackLayout class="hr-line border"></StackLayout>
+
+        <!-- <Button class="borderless-button link" text="Frequently Asked Questions" (tap)="linkTap(1)"></Button> -->
+        <Button class="borderless-button link" text="Customer Support" (tap)="linkTap(2)"></Button>
+        <!-- <Button class="borderless-button link" text="Report a Bug" (tap)="linkTap(3)"></Button> -->
+        <!-- <Button class="borderless-button link" text="Rate This App" (tap)="linkTap(4)"></Button> -->
+        <StackLayout *ngIf="(scheduleEnabled$ | async) && (syncSchedule$ | async); let syncSchedule">
+            <Button *ngIf="!syncSchedule.shouldSync" class="borderless-button link" text="Sync My Calendar" (tap)="linkTap(10)"></Button>
+            <GridLayout *ngIf="syncSchedule.shouldSync" columns="*, auto">
+                <Button col="0" class="borderless-button link" text="Unsync My Calendar" (tap)="linkTap(11)"></Button>
+                <GridLayout col="1" rows="*, auto, *">
+                    <Label text=" " row="0"></Label>
+                    <Label *ngIf="syncSchedule.dateCalled" class="last-sync-date" row="1" [text]="'Last Sync: ' + (syncSchedule.dateCalled | date: 'shortDate')" ></Label>
+                    <Label *ngIf="!syncSchedule.dateCalled" class="last-sync-date" row="1" text="Syncing..." ></Label>
+                </GridLayout>
+            </GridLayout>
+        </StackLayout>
+
+        <Label class="border title" text="Legal Information"></Label>
+        <StackLayout class="hr-line border"></StackLayout>
+
+        <Button class="borderless-button link" text="Privacy Policy" (tap)="linkTap(5)"></Button>
+        <Button class="borderless-button link" text="Terms of Use" (tap)="linkTap(6)"></Button>
+
+        <Label class="border title" text="Security"></Label>
+        <StackLayout class="hr-line border"></StackLayout>
+
+        <GridLayout columns="*, auto">
+            <Button class="borderless-button link" col="0" [text]="'Enable ' + fingerprintString" (tap)="linkTap(7)"></Button>
+            <StackLayout col="1" (tap)="linkTap(7)">
+                <Switch class="fingerprint-switch" isUserInteractionEnabled="false" [checked]="fingerprintEnabled" (checkedChange)="onCheckedChange($event)"></Switch>
+            </StackLayout>
+        </GridLayout>
+        <Button class="borderless-button link" text="Change Password" (tap)="linkTap(8)"></Button>
+        <Button class="borderless-button link" text="Log Out" (tap)="linkTap(9)"></Button>
+
+    </StackLayout>
+</ScrollView>

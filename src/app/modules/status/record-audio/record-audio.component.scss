@@ -1,0 +1,87 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.circle {
+    clip-path: circle(80% at 50% 50%);
+    text-align: center;
+}
+
+.mic {
+    font-size: 90;
+    color: #ffffff;
+}
+
+.time {
+    font-size: 48;
+    color: $primary;
+    font-weight: 300;
+}
+
+.top-text {
+    text-align: center;
+    vertical-align: middle;
+    color: $primary;
+    font-size: 16;
+    margin-bottom: 25;
+    margin-top: 25;
+    margin-left: 15;
+    margin-right: 15;
+}
+
+.bottom-text {
+    text-align: center;
+    vertical-align: middle;
+    color: $primary;
+    font-size: 14;
+}
+
+.continue {
+    margin-top: 30;
+    background-color: $primary;
+    text-transform: capitalize;
+    font-size: 20;
+    color: #ffffff;
+    height: 60;
+}
+
+.top-space {
+    margin-top: 40;
+}
+
+.visulizer {
+    margin-left: 10;
+    margin-right: 10;
+    height: 20;
+}
+
+.sound-block {
+    background-color: #ffffff;
+    border-radius: 5;
+    border-color: #ffffff;
+    border-width: 1;
+    height: 12;
+    margin: 1;
+
+    &.green-on {
+        background-color: $approval;
+        border-color: $approval;
+    }
+
+    &.yellow-on {
+        background-color: #f7b500;
+        border-color: #f7b500;
+    }
+
+    &.red-on {
+        background-color: $error;
+        border-color: $error;
+    }
+}
+
+.modulation-bar {
+    height: 10;
+    width: 5;
+    margin: 2;
+    background-color: #ee2f15;
+
+}

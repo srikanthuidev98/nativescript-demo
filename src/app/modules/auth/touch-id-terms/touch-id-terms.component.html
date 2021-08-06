@@ -1,0 +1,17 @@
+<GridLayout rows="*, auto" backgroundColor="white">
+    <ScrollView row="0">
+        <StackLayout>
+            <Image src="res://assuricarelogopurple"></Image>
+            <Label class="top-text" row="1" textWrap="true" text="Terms and conditions for EnablingBiometric Authentication (using Touch ID or Fingerprint) with AssuriCare"></Label>
+            <Label textWrap="true" row="2" text="To enable biometric authentication for sign in, you are required to save your AssuriCare Caregiver username to this device."></Label>
+
+            <Label textWrap="true" row="3" text="AssuriCare does not control the functionality of fingerprint or Touch ID and does not have access to your fingerprint(s) information.  You understand and agree that any fingerprint stored on this device can be used to access your accounts in the AssuriCare Caregiver App.  For more information on how biometric functionality works for your device, please refer to your device manufacturer’s support resources.  There may be circumstances where biometric authentication will not function as expected and sign in will require a password."></Label>
+
+            <Label textWrap="true" row="4" text="By choosing Accept, you agree to these Terms and Conditions.  Choose Decline to cancel set up."></Label>
+        </StackLayout>
+    </ScrollView>
+    <GridLayout marginTop="0" marginBottom="2" row="1" columns="*, *">
+        <Button class="primary-button decline" col="0" text="Decline" (tap)="declineTap()"></Button>
+        <Button class="primary-button" col="1" text="Accept" (tap)="acceptTap()"></Button>
+    </GridLayout>
+</GridLayout>

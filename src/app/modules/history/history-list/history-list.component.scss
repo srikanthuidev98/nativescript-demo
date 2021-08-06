@@ -1,0 +1,16 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.year {
+    background-color: $dividing-lines;
+
+    Label {
+        font-size: 20;
+        color: #000005;
+    }
+}
+
+.no-shift-label {
+    vertical-align: top;
+    margin-top: 40;
+}

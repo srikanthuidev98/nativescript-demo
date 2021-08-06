@@ -1,0 +1,6 @@
+<GridLayout class="dropdown-layout" rows="auto, auto" columns="*, *, *, auto">
+    <Label class="verCenter" row="0" col="0" colSpan="4" textWrap="true" [text]="questionText"></Label>
+    <DropDown class="dropdown-box" [class.notEditable]="!editable" [class.error]="showError" row="1" col="0" colSpan="4" [hint]="hint" itemsTextAlignment="center"
+        [items]="items" [isEnabled]="editable" [selectedIndex]="selectedIndex" (selectedIndexChanged)="dropDownSelectedItem($event)"></DropDown>
+    <Label class="chevron fal center" [class.error]="showError" row="1" col="3" text="&#xf078;"></Label>
+</GridLayout>

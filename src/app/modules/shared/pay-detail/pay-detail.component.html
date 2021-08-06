@@ -1,0 +1,68 @@
+<CardView *ngIf="client" class="cardStyle" margin="10" elevation="20" radius="5" shadowRadius="5" (loaded)="cardLoaded($event.object)">
+    <!-- Payroll & Visits:   Period Details -->
+    <GridLayout *ngIf="visits$ | async; let visits" rows="auto, auto" columns="*, 3*, 2*">
+        <!-- Left column -->
+        <Label col="0" row="0" class="left-pay" text=""></Label>
+        <Label col="0" row="1" class="left-pay" text=""></Label>
+        <Label *ngIf="client.RegistryProvider" class="left-pay" col="0" row="0" rowSpan="2" verticalAlignment="center" textWrap="true"  text="Gross Pay*"></Label>
+        <Label *ngIf="!client.RegistryProvider" class="left-pay" col="0" row="0" rowSpan="2" verticalAlignment="center" text="Hours"></Label>
+
+        <!-- Header -->
+        <FlexboxLayout *ngIf="client.RegistryProvider" class="flexData m-t-10" col="1" row="0" colSpan="2">
+            <Label class="totalPay horCenter" [text]="'$' + dollars"></Label>
+            <Label class="totalPay horCenter cents" [text]="'.' + cents"></Label>
+            <Label width="100%" height="1"></Label>
+            <Label *ngIf="visits[0]" class="header-below horCenter" [text]="(visits[0].PeriodStartDate | date: 'MMM d') + ' - ' + (visits[0].PeriodEndDate | date: 'MMM d')"></Label>
+        </FlexboxLayout>
+        <FlexboxLayout *ngIf="!client.RegistryProvider" class="flexData" col="1" row="0" colSpan="2">
+            <Label *ngIf="visits[0]" class="header-above horCenter" [text]="(visits[0].PeriodStartDate | date: 'MMM d') + ' - ' + (visits[0].PeriodEndDate | date: 'MMM d')"></Label>
+            <Label class="totalHours horCenter" width="100%" [text]="totalHours"></Label>
+            <Label class="header-below horCenter" text="Total Hours"></Label>
+        </FlexboxLayout>
+
+        <!-- Sub text + Data -->
+        <StackLayout class="flexData m-t-10 m-b-15" col="1" row="1">
+            <Label *ngIf="client.RegistryProvider" class="option-title" text="Total Hours"></Label>
+            <Label class="option-title" text="Mileage/Expenses"></Label>
+        </StackLayout>
+        <StackLayout class="flexData m-t-10 m-b-15" col="2" row="1">
+            <Label *ngIf="client.RegistryProvider" class="option-data" textWrap="true" [text]="totalHours"></Label>
+            <Label class="option-data" [text]="milageInDollars | currency"></Label>
+        </StackLayout>
+    </GridLayout>
+
+    <!-- Visit:  Shift Details -->
+    <GridLayout *ngIf="visit$ | async; let visit" rows="auto, auto" columns="*, 3*, 2*">
+        <!-- Left column -->
+        <Label col="0" row="0" class="left-pay" text=""></Label>
+        <Label col="0" row="1" class="left-pay" text=""></Label>
+        <Label *ngIf="client.RegistryProvider" class="left-pay" col="0" row="0" rowSpan="2" verticalAlignment="center" textWrap="true"  text="Gross Pay*"></Label>
+        <Label *ngIf="!client.RegistryProvider" class="left-pay" col="0" row="0" rowSpan="2" verticalAlignment="center" text="Hours"></Label>
+
+        <!-- Header -->
+        <FlexboxLayout *ngIf="client.RegistryProvider" class="totalPay flexData m-t-6" col="1" row="0" colSpan="2">
+            <Label class="horCenter" [text]="'$' + dollars"></Label>
+            <Label class="horCenter cents" [text]="'.' + cents"></Label>
+        </FlexboxLayout>
+        <FlexboxLayout *ngIf="!client.RegistryProvider" class="flexData m-t-6" col="1" row="0" colSpan="2">
+            <Label class="totalHours horCenter" width="100%" [text]="visit.PaidHours"></Label>
+            <Label class="header-hours horCenter" text="Total Hours"></Label>
+        </FlexboxLayout>
+
+        <!-- Sub text + Data -->
+        <StackLayout class="flexData m-b-15" col="1" row="1">
+            <Label class="option-title" text="Caregiver ID"></Label>
+            <Label *ngIf="client.RegistryProvider" class="option-title" text="Pay rate"></Label>
+            <Label class="option-title" text="Per"></Label>
+            <Label class="option-title" text="Hours"></Label> <!-- TO DO - Add all other type of hours-->
+            <Label class="option-title" text="Mileage/Expenses"></Label>
+        </StackLayout>
+        <StackLayout class="flexData" col="2" row="1">
+            <Label class="option-data" [text]="client.CaregiverId"></Label>
+            <Label *ngIf="client.RegistryProvider" textWrap="true" class="option-data" [text]="visit.PayRate | currency"></Label>
+            <Label class="option-data" [text]="payRateType[client.PayRateType]"></Label>
+            <Label class="option-data" [text]="visit.PaidHours"></Label>
+            <Label class="option-data" [text]="visit.MileageAmount | currency"></Label>
+        </StackLayout>
+    </GridLayout>
+</CardView>

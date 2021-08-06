@@ -1,0 +1,12 @@
+Version: 3.5.9
+- Revamped Location services
+- Removed old SubmitAction and GetLastShifts URL and models.
+- Added new API for SubmitAction and GetLastVisits
+- Completely revamped how check in / out works.
+- Revamped Shift component with the new object from SubmitAction and GetLastVisits
+- Added location Alert screen, if showLocationAlert is on and user was outside of geofence during the visit.
+- Added Calendar Sync to settings, if user has schedule enabled.
+- if sync is on, will update user's calendar once every 24 hours.
+- sync data in schedule screen from side drawer correctly
+- multiple geolocation for visit fixed
+- prevented check-in button for started visits

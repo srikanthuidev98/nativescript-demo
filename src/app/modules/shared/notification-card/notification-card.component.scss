@@ -1,0 +1,32 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.custom-card {
+    border-radius: 3;
+}
+
+.left-bar {
+    font-size: 25;
+    background-color: transparent;
+}
+
+.title-text {
+    color: $primary-text;
+    font-size: 18;
+    margin: 10;
+    margin-bottom: 5;
+    margin-top: 5;
+}
+
+.body-text {
+    color: $secondary-text;
+    font-size: 16;
+    margin: 10;
+    margin-top: 0;
+}
+
+.html-layout {
+    margin: 5;
+    margin-left: 10;
+    margin-bottom: -10;
+}

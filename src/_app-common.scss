@@ -1,0 +1,385 @@
+@import 'ACCommon/styles/common';
+
+.far {
+    font-family: "Font Awesome 5 Pro", "fa-regular-400";
+    font-weight: 400;
+}
+
+.fab {
+    font-family: "Font Awesome 5 Brands", "fa-brands-400";
+    font-weight: 400;
+}
+
+.fas {
+    font-family: "Font Awesome 5 Pro", "fa-solid-900";
+    font-weight: 900;
+}
+
+.fal {
+    font-family: "Font Awesome 5 Pro", "fa-light-300";
+    font-weight: 300;
+}
+
+.fad {
+    font-family: "Font Awesome 5 Pro", "fa-duotone-900";
+    font-weight: 900;
+}
+
+.fa-rotate-180 {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.fa-flip-horizontal {
+    transform: scaleX(-1);
+}
+
+// This is used for Dark mode. Right now we are just changing the colors back to original
+.ns-dark Page {
+    background-color: #ffffff;
+
+    .primary-button {
+        background-color: $primary;
+    }
+
+    .primary-button-disabled {
+        background-color: $primary;
+
+        &:disabled {
+            background-color: #dfdfdf;
+            color: $primary-text;
+        }
+    }
+
+    .secondary-button {
+        background-color: $cta;
+    }
+
+    .borderless-button {
+        color: $link-blue;
+        background-color: transparent;
+    }
+}
+
+.app-button {
+    color: #ffffff;
+    height: 50;
+    width: 90%;
+    border-radius: 2;
+    margin-top: 10;
+    margin-bottom: 10;
+    text-transform: capitalize;
+    font-size: 18;
+    font-weight: 500;
+}
+
+.primary-button {
+    @extend .app-button;
+    background-color: $primary;
+
+    &:highlighted {
+        background-color: #8d5fcc;
+    }
+}
+
+.primary-button-disabled {
+    @extend .app-button;
+    background-color: $primary;
+
+    &:disabled {
+        background-color: #dfdfdf;
+        color: $primary-text;
+    }
+}
+
+.secondary-button {
+    @extend .app-button;
+    background-color: $cta;
+
+    &:highlighted {
+        background-color: #d65d31;
+    }
+}
+
+.borderless-button {
+    color: $link-blue;
+    background-color: transparent;
+    text-transform: none;
+    border-width: 0;
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.borderless-button:disabled {
+    color: $secondary-text;
+}
+
+.double-button-layout {
+    margin-bottom: 30;
+
+    Button {
+        background-color: $primary;
+        color: #ffffff;
+        border-width: 1;
+        border-color: $primary;
+
+        &:highlighted {
+            opacity: 0.9;
+        }
+    }
+
+    .whiteButton {
+        background-color: #ffffff;
+        color: $primary;
+    }
+}
+
+.chevron-copy {
+    horizontal-align:right;
+    font-size: 16;
+    color: #6e7379;
+    padding-right: 20;
+}
+
+.validation-error {
+    text-align: center;
+    font-size: 16;
+    color: $error;
+    margin-top: -2;
+}
+
+// Common page class
+.page-content {
+    .page-placeholder {
+        color: $page-icon-color;
+        font-size: 20;
+        vertical-align: center;
+        horizontal-align: center;
+    }
+
+    .page-icon {
+        font-size: 72;
+        vertical-align: top;
+        horizontal-align: center;
+        color: $page-icon-color;
+        margin-top: 20%;
+    }
+}
+
+.cardStyle {
+    background-color: #fff;
+    color:black;
+
+    .left-label {
+        background-color:$primary;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    .left-pay {
+        @extend .left-label;
+        background-color:$pay-box;
+    }
+
+    .left-adl {
+        @extend .left-label;
+        background-color:$adl-box;
+    }
+
+    .left-iadl {
+        @extend .left-label;
+        background-color:$iadl-box;
+    }
+
+    .flexData {
+        flex-wrap: wrap;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+    }
+
+    .totalPay {
+        color: $pay-box;
+        font-size: 40;
+        font-weight: 200;
+        margin-top: 0;
+        margin-bottom: 5;
+    }
+
+    .totalHours {
+        font-size: 40;
+        font-weight: 200;
+        margin-top: 5;
+        margin-bottom: 5;
+    }
+
+    .title {
+        font-size: 12;
+        text-align: left;
+        width: 100%;
+        color: $secondary-text;
+        margin-bottom: -2;
+    }
+
+    .data {
+        font-size: 22;
+        text-align: left;
+        width: 100%;
+    }
+
+    .time-data {
+        font-size: 20;
+        text-align: left;
+        width: 100%;
+    }
+
+    .option-title {
+        text-align: left;
+        margin-left: 10;
+        color: $secondary-text;
+        font-size: 18;
+    }
+
+    .option-data {
+        text-align: right;
+        margin-right: 15;
+        color: $primary-text;
+        font-size: 18;
+    }
+
+    .edit-btn {
+        color: $link-blue;
+        margin-right: 20;
+        margin-bottom: 10;
+        margin-top: 20;
+        text-align: right;
+    }
+}
+
+.custom-tab-container {
+    height: 50;
+
+    Button {
+        color: $primary-text;
+        background-color: transparent;
+        text-transform: none;
+        border-width: 0;
+        z-index: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 16;
+
+        &:highlighted {
+            background-color: lighten($primary, 80%);
+        }
+
+        &.selected {
+            color: $primary;
+        }
+    }
+
+    StackLayout {
+        background-color: $dividing-lines;
+        margin-right: 20;
+        margin-left: 20;
+        height: 3;
+
+        &.selected {
+            background-color: $primary;
+        }
+    }
+}
+
+.disclaimer {
+    margin-left: 15;
+    margin-right: 15;
+    margin-top: 5;
+    margin-bottom: 15;
+    color: $primary-text;
+    font-size: 20;
+}
+
+.hr-line {
+    background-color: $dividing-lines;
+    height: 1;
+}
+
+.ver-line {
+    background-color: $dividing-lines;
+    width: 1;
+}
+
+.verCenter {
+    vertical-align: center;
+}
+
+.horCenter {
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.btn.btn-primary {
+    background-color: $cta;
+}
+
+.list-group-item {
+    Label {
+        color: $primary-text;
+    }
+}
+
+.no-shift-label {
+    color: $primary-text;
+    font-size: 20;
+    margin: 15;
+    margin-top: 20;
+    text-align: center;
+}
+
+.dropdown-chervon {
+    font-size: 20;
+    margin-right: 20;
+
+    &.up {
+        animation-name: rotate-up;
+        animation-duration: .3;
+        animation-fill-mode: forwards;
+    }
+    @keyframes rotate-up {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(180deg); }
+    }
+
+    &.down {
+        animation-name: rotate-down;
+        animation-duration: .3;
+        animation-fill-mode: forwards;
+    }
+    @keyframes rotate-down {
+        from { transform: rotate(180deg); }
+        to { transform: rotate(0deg); }
+    }
+}
+
+.no-messages-layout {
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 40;
+
+    Label {
+        font-size: 26;
+        color: $secondary-text;
+    }
+
+    .far, .fab, .fas, .fal, .fad {
+        font-size: 42;
+    }
+}

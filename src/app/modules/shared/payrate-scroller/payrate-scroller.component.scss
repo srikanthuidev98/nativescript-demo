@@ -1,0 +1,40 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.payrate-tab-container {
+    height: 30;
+    margin-top: 5;
+    margin-bottom: 5;
+
+    Button {
+        background-color: transparent;
+        text-transform: none;
+        border-width: 0;
+        z-index: 0;
+        margin: 0;
+        padding: 0;
+        color: $primary-text;
+        font-size: 15;
+        margin-right: 5;
+        margin-left: 5;
+
+        &:highlighted {
+            background-color: lighten($primary, 80%);
+        }
+
+        &.selected {
+            color: $primary;
+        }
+    }
+
+    StackLayout {
+        background-color: #eeeeee;
+        margin-right: 5;
+        margin-left: 5;
+        height: 3;
+
+        &.selected {
+            background-color: $primary;
+        }
+    }
+}

@@ -1,0 +1,37 @@
+<CardView class="cardStyle" margin="10" elevation="20" radius="5" shadowRadius="5" paddingTop="50" (loaded)="cardLoaded($event.object)">
+    <GridLayout rows="auto, 4, auto" columns="*, 3*, 2*">
+        <StackLayout class="left-background-color" col="0" row="0" rowSpan="3"></StackLayout>
+
+        <!-- Left Label Date -->
+        <StackLayout class="left-label center" col="0" row="0" rowSpan="3">
+            <StackLayout>
+                <Label *ngIf="visit.CheckInTime" [text]="visit.CheckInTime | date: 'LLL'"></Label>
+                <Label *ngIf="visit.CheckInTime" class="left-bottom-date" [text]="visit.CheckInTime | date: 'dd'"></Label>
+                <Label *ngIf="!visit.CheckInTime" [text]="visit.CheckOutTime | date: 'LLL'"></Label>
+                <Label *ngIf="!visit.CheckInTime" class="left-bottom-date" [text]="visit.CheckOutTime | date: 'dd'"></Label>
+            </StackLayout>
+        </StackLayout>
+
+        <Label *ngIf="showChevron" row="0" col="3" class="chevron-copy fas center" text="&#xf054;"></Label>
+        <FlexboxLayout marginLeft="10" marginRight="30" marginTop="5" class="flexData" col="1" row="0" rowSpan="2" colSpan="2">
+            <Label class="title" text="Client"></Label>
+            <Label *ngIf="!dualClient" class="data" [text]="firstLastName"></Label>
+            <Label *ngIf="dualClient" textWrap="false" class="data" [text]="dualClient.c1.Name + ' & ' + dualClient.c2.Name"></Label>
+        </FlexboxLayout>
+        <FlexboxLayout marginLeft="10" class="flexData" marginBottom="5" col="1" row="2">
+            <Label class="title" text="Check In"></Label>
+            <Label *ngIf="visit.CheckInTime" class="time-data" [text]="visit.CheckInTime | date: 'shortTime'"></Label>
+            <Label *ngIf="!visit.CheckInTime" class="time-data reminder" text="Not Set"></Label>
+        </FlexboxLayout>
+        <FlexboxLayout class="flexData" col="2" row="2">
+            <Label class="title" text="Check Out"></Label>
+            <Label *ngIf="visit.CheckOutTime" class="time-data" [text]="visit.CheckOutTime | date: 'shortTime'"></Label>
+            <Label *ngIf="!visit.CheckOutTime && !showReminder" class="time-data reminder" text="Not Set" ></Label>
+            <StackLayout *ngIf="!visit.CheckOutTime && showReminder">
+                <Label *ngIf="reminderDate$ | async; let reminderDate" class="time-data reminder" [text]="reminderDate | date: 'shortTime'" (tap)="reminderTap()"></Label>
+                <Label *ngIf="!(reminderDate$ | async); let reminderDate" class="time-data reminder" text="Not Set" (tap)="reminderTap()"></Label>
+            </StackLayout>
+        </FlexboxLayout>
+        <Label *ngIf="showViewServices" class="services" row="0" col="2" text="View" (tap)="viewServicesTap()"></Label>
+    </GridLayout>
+</CardView>

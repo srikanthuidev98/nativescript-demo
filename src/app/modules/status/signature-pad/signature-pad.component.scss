@@ -1,0 +1,18 @@
+/* Add mobile styles for the signature-pad component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.title {
+    color: $primary-text;
+    font-size: 16;
+    text-align: center;
+    margin-top: 30;
+    margin-bottom: 30;
+}
+
+.clear-btn {
+    font-size: 20;
+    vertical-align: bottom;
+    text-align: right;
+    margin-right: 2;
+    margin-bottom: -5;
+}

@@ -1,0 +1,67 @@
+@import '../../../../ACCommon/styles/common';
+
+.background {
+    background-color: $primary;
+}
+
+.LTCimage {
+    width: 60%;
+    margin-top: 20;
+    margin-right: 30;
+    margin-left: 30;
+    margin-bottom: 10;
+}
+
+.login-form {
+    background-color: #ffffff;
+    border-radius: 3;
+    margin-right: 10;
+    margin-left: 10;
+    margin-bottom: 20;
+}
+
+.remember {
+    color: $secondary-text;
+    font-size: 16;
+    margin-left: 5;
+}
+
+.forgot {
+    font-size: 16;
+    margin-top: 10;
+}
+
+.fingerprint-layout {
+
+    Label {
+        color: $secondary-text;
+
+        &.selected {
+            color: $primary;
+        }
+    }
+
+    .fingerprint {
+        font-size: 16;
+        margin-right: 15;
+        margin-left: 7;
+    }
+
+    .fas {
+        font-size: 24;
+    }
+}
+
+.terms {
+    margin-top: 5;
+    margin-bottom: 15;
+
+    Label {
+        font-size: 14;
+        color: $secondary-text;
+    }
+
+    .link {
+        color: $link-blue;
+    }
+}

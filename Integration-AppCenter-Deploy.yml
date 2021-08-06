@@ -1,0 +1,165 @@
+# Node.js with Angular
+# Build a Node.js project that uses Angular.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- integration
+
+pool:
+#  vmImage: macOS-10.14
+  vmImage: macOS-latest
+
+variables:
+- group: apexmobile-group
+
+steps:
+- checkout: self
+  path: Apex  # Change the default source folder from /s to /Apex
+
+# Download Android keystore
+- task: DownloadSecureFile@1
+  name: androidKeyStore
+  displayName: 'Download Android file.keystore'
+  inputs: 
+    secureFile: 'file.keystore'
+
+# Download Apple p12 Certificate
+- task: DownloadSecureFile@1
+  name: appleP12
+  displayName: 'Download Apple p12 Certificate'
+  inputs: 
+    secureFile: 'Certificates7-23.p12'
+
+# Download Apple provisioning profile
+- task: DownloadSecureFile@1
+  name: pProfile
+  displayName: 'Download Apple provisioning profile'
+  inputs: 
+    secureFile: 'Caregiver_Prod_App_Store.mobileprovision'
+
+#Install Apple Certificate(Distribtion)
+- task: InstallAppleCertificate@2
+  displayName: 'Install an Apple certificate Distribution (.p12)'
+  inputs:
+    certSecureFile: 'iOS-Dist-Certificates.p12'
+    certPwd: $(KEYSTORE_PASSWORD)
+    keychain: 'temp'
+    deleteCert: true
+
+# Install Apple Provisioning Profile(Distribution)
+- task: InstallAppleProvisioningProfile@1
+  displayName: 'Apple Provisioning Profile(Caregiver_Prod_App_Store.mobileprovision)'
+  inputs:
+    provisioningProfileLocation: 'secureFiles'
+    provProfileSecureFile: 'Apex_iOS_Integrations.mobileprovision'
+    removeProfile: true
+
+# -- Not needed
+#- script: |
+#    npm install -g @angular/cli
+#    npm install
+#  displayName: 'npm install and build'
+
+# -- Not needed
+#- script: |
+#    brew install ruby@2.7
+#    brew link ruby@2.7
+#    export PATH=/opt/homebrew/lib/ruby/gems/2.7.0/bin:$PATH
+#  displayName: 'brew install ruby@2.7'
+
+- task: NodeTool@0
+  inputs:
+    versionSpec: '14.x' # 10.x 12.x
+    checkLatest: true
+  displayName: 'Install Node.js'
+
+#- script: |
+#    npm install -g @angular/cli
+#  displayName: 'npm install -g @angular/cli'
+
+- script: |
+    pip install --ignore-installed six
+  displayName: 'pip install --ignore-installed six'
+
+
+# -- No difference -  npm install -g nativescript@7.0.9-rc.2
+- script: |
+    npm install -g nativescript@7.0.9-rc.2
+    npm install
+  displayName: 'Install NativesSript ~6 Minutes'
+
+- script: |
+    npm i
+    ns plugin remove nativescript-azure-mobile-apps
+  displayName: 'npm i'
+
+- script: |
+    ns platform remove ios
+    ns platform remove android
+    ns platform add ios
+    ns platform add android
+    ns doctor
+  displayName: 'ns doctor'
+
+
+# github credentials - not needed - testing for azure-mobile-apps-ios-client.git
+#- script: |
+#    git config --global user.name "r.sorensen@assuricare.com"
+#    git config --global user.name
+#    git config --global user.password "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"
+#    git config --global user.password
+#    git config --global user.email "r.sorensen@assuricare.com"
+#    git config --global user.email
+#?? Didn't work    git clone https://github.com/phvannor/azure-mobile-apps-ios-client.git
+#  displayName: 'Git Config'
+
+- script: |
+    xcodebuild -version # makeing sure the correct xcode version is being used
+    #    npm run entitle #custom bash script used to change entitlement file
+    #    tns run ios --provision ba59bbb8-52c7-4682-994f-14931e899774    #see what provisioning profile and certificate are installed... helpful for debugging
+    tns build ios --env.production --release --bundle    #creates xcworkspace
+  displayName: 'Build ios Release xcworkspace'
+
+- script: |
+    ns build ios --release --for-device --env.uglify --env.name=uat --provision fc0600d5-ef2e-45f3-bcf3-8d7266cd0c51
+  displayName: 'Build iOS'
+  env: { string: 'GIT_TERMINAL_PROMPT=0' }
+  
+#- task: PublishPipelineArtifact@1
+#  inputs:
+#    targetPath: '$(Build.SourcesDirectory)$(ipa_path)'
+#    artifact: 'ipaDrop'
+#    publishLocation: 'pipeline'
+    
+- script: |
+      ns build android --release --env.uglify --env.aot --env.name=uat --key-store-path $(androidKeyStore.secureFilePath) --key-store-password $(KEYSTORE_PASSWORD) --key-store-alias assuricare --key-store-alias-password $(KEYSTORE_PASSWORD)
+  displayName: 'Build Android'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.SourcesDirectory)$(apk_path)'
+    artifact: 'apkDrop'
+    publishLocation: 'pipeline'
+
+- script: |
+    sudo npm install -g appcenter-cli
+  displayName: 'Install AppCenter-CLI'
+
+- script: |
+    appcenter login --token $(android_token)
+ #737e9d13099ebb21bf6fb79053e358c07bd4185c    
+  displayName: 'App Center login'
+  
+- script: |
+    appcenter apps list
+    ls $(Agent.TempDirectory)
+  displayName: 'App Center list apps - testing login'
+  
+#AssuriCare/Apex-Android-UAT
+# Change the appcenter apps set-current to assuricare/Apex-Android-UAT
+- script: |
+    appcenter apps set-current r.sorensen-assuricare.com/ApexTest
+    appcenter distribute release -f '$(Build.SourcesDirectory)$(apk_path)' -R '$(Build.SourcesDirectory)/release_notes.md' -g Alpha
+  displayName: 'App Center Distribute'
+

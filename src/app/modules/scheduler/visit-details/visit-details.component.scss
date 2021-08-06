@@ -1,0 +1,141 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.rectangle {
+    opacity: 0.75;
+    background-color: $primary;
+}
+
+.circle {
+    clip-path: circle(80% at 50% 50%);
+    text-align: center;
+    background-color: $dividing-lines;
+    height: 115;
+    width: 115;
+
+    &.has-picture {
+        background-color: #fff;
+    }
+}
+
+.inner-circle {
+    clip-path: circle(80% at 50% 50%);
+    text-align: center;
+    background-color: #fff;
+    height: 110;
+    width: 110;
+
+    .initals {
+        text-align: center;
+        vertical-align: middle;
+        color: $primary;
+        font-size: 45;
+    }
+}
+
+.header-layout {
+    Label {
+        color: #fff;
+        font-size: 20;
+        text-align: center;
+        vertical-align: middle;
+    }
+}
+
+.data-layout {
+    margin-top: 10;
+
+    .title {
+        color: $primary-text;
+        font-weight: 500;
+        font-size: 12;
+        margin-bottom: 6;
+    }
+
+    .sub-text {
+        color: $secondary-text;
+        font-size: 16;
+        margin-right: 20;
+    }
+
+    .hr-line {
+        margin-top: 7;
+        margin-bottom: 7;
+        margin-right: 20;
+        margin-left: 20;
+    }
+
+    .icon {
+        color: $link-blue;
+        font-size: 14;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .address-icon {
+        @extend .icon;
+        margin-top: 5;
+        vertical-align: top;
+    }
+
+    .blue {
+        color: $link-blue;
+    }
+
+    .phone-layout {
+        .sub-text {
+            color: $link-blue;
+        }
+
+        &.no-phone {
+            .sub-text {
+                color: $secondary-text;
+                font-style: italic;
+            }
+
+            .icon {
+                color: $secondary-text;
+            }
+
+            .hr-line {
+                height: 1.5;
+                width: 50;
+                margin-left: 30;
+            }
+        }
+    }
+}
+
+.dropDown-layout {
+    color: $primary-text;
+    margin: 20;
+    margin-top: 15;
+    border-top-width: 1;
+    border-color: $dividing-lines;
+
+    .title {
+        background-color: #f8f9f9;
+        height: 40;
+        border-color: $dividing-lines;
+        border-width: 1;
+        border-top-width: 0;
+        font-size: 16;
+
+        Label {
+            margin-right: 15;
+            margin-left: 10;
+        }
+    }
+
+    .data {
+        background-color: #fff;
+        border-color: $dividing-lines;
+        border-width: 1;
+        border-top-width: 0;
+    }
+
+    .comment {
+        font-size: 16;
+        margin: 20;
+    }
+}

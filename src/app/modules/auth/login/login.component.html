@@ -1,0 +1,35 @@
+<ScrollView>
+    <StackLayout appHideKeyboard class="background">
+        <Image src="res://assuricarelogowhite" android:width="65%" android:height="90" stretch="fill" class="LTCimage" ></Image>
+        <StackLayout appHideActionBar class="login-form">
+            
+            <app-ac-textfield (valueChanged)="valueChanged($event, 'email')" type="email" text="Email" [initalText]="remembereEmailText"></app-ac-textfield>
+            <app-ac-textfield (valueChanged)="valueChanged($event, 'password')" type="password" text="Password"></app-ac-textfield>
+            
+            <GridLayout  height="70" columns="auto, auto, *, auto">
+                <Switch class="m-l-20" col="0" [checked]="rememberEmail" (checkedChange)="onCheckedChange($event)"></Switch>
+                <StackLayout class="verCenter" col="1">
+                    <Label class="remember" text="Remember me"></Label>
+                </StackLayout>
+                <StackLayout class="center fingerprint-layout" orientation="horizontal" col="3" (tap)="fingerprintTap()">
+                    <Label class="fas" [class.selected]="fingerprintEnabled" text="&#xf577;"></Label>
+                    <Label class="fingerprint" [class.selected]="fingerprintEnabled" [text]="fingerprintString"></Label>
+                </StackLayout>
+            </GridLayout>
+
+            <Button class="secondary-button" [text]="'LOGIN.LOGIN' | translate" (tap)="onLoginClick()"></Button>
+            <Label *ngIf="showError" class="validation-error" [text]="errorText"></Label>
+            <Label *ngIf="error$ | async; let error" class="validation-error" [text]="error"></Label>
+            
+            <Button class="borderless-button forgot" ios:marginBottom="20" [text]="'LOGIN.FORGOTPASSWORD' | translate" nsRouterLink="/forgot-password"></Button>
+            <Button *ngIf="currentEnvironment !== 'Production'" class="borderless-button" marginBottom="0" [text]="'Change Environment - ' + currentEnvironment" (tap)="changeEnvironment()"></Button>
+            <GridLayout columns="*, auto, *">
+                <StackLayout class="center terms" col="1" orientation="horizontal">
+                    <Label text="By logging in I accept the " ></Label>
+                    <Label class="link" text="Terms & Conditions" (tap)="termsTap()"></Label>
+                    <Label text=" of use"></Label>
+                </StackLayout>
+            </GridLayout>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>

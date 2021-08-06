@@ -1,0 +1,41 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.header {
+    height: 40;
+    color: white;
+    background-color: $primary;
+    font-size: 20;
+    vertical-align: center;
+    text-align: center;
+}
+
+.table-layout {
+    margin-top: 20;
+    margin-bottom: 20;
+
+    GridLayout {
+        Label {
+            color: $secondary-text;
+            size: 16;
+            margin-top: 5;
+            margin-bottom: 5;
+        }
+
+        .title {
+            color: $primary-text;
+            font-weight: 500;
+        }
+
+        .left {
+            margin-left: 10;
+        }
+    }
+}
+
+.no-changes {
+    color: $primary;
+    font-size: 20;
+    text-align: center;
+    margin: 5;
+}

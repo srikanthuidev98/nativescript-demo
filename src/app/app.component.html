@@ -1,0 +1,71 @@
+<RadSideDrawer allowEdgeSwipe="false" [drawerTransition]="sideDrawerTransition">
+  <GridLayout tkDrawerContent rows="65, 10, *, auto" class="sidedrawer sidedrawer-left">
+    <StackLayout height="65" row="0" class="center" backgroundColor="#ffffff"></StackLayout>
+    <StackLayout height="60" row="0" class="center">
+        <Image height="50" src="res://assuricarelogopurple" android:marginTop="5"></Image>
+    </StackLayout>
+
+    <StackLayout row="1" class="sidedrawer-content"></StackLayout>
+
+    <ScrollView row="2" iosOverflowSafeArea="false">
+        <StackLayout class="sidedrawer-content">
+            <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/status/checkin') || isComponentSelected('/status/checkout')" (tap)="onNavItemTap('/status/')">
+                <Label col="0" text="&#xf015;" class="fas"></Label>
+                <Label col="1" text="Home"></Label>
+            </GridLayout>
+
+            <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/profile')" (tap)="onNavItemTap('/profile')">
+                <Label col="0" text="&#xf007;" class="far"></Label>
+                <Label col="1" text="Profile"></Label>
+            </GridLayout>
+
+            <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/status/clients-list/current-period')" (tap)="onNavItemTap('/status/clients-list/current-period')">
+                <Label col="0" text="&#xf1da;" class="fas fa-flip-horizontal"></Label>
+                <Label col="1" text="Current Period"></Label>
+            </GridLayout>
+
+            <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/status/clients-list/history')" (tap)="onNavItemTap('/status/clients-list/history')">
+                <Label col="0" text="&#xf1da;" class="fas"></Label>
+                <Label col="1" text="History"></Label>
+            </GridLayout>
+
+            <GridLayout *ngIf="messagingEnabled$ | async" columns="auto, auto, auto" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/messaging')" (tap)="onNavItemTap('/messaging')">
+                <Label col="0" text="&#xf4ad;" class="fas"></Label>
+                <Label col="1" text="Messages"></Label>
+                <Label *ngIf="!isComponentSelected('/messaging')" col="2" class="message-bubble" [text]="unreadMessages$ | async"></Label>
+            </GridLayout>
+
+            <!-- <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/status')" (tap)="onNavItemTap('/status')">
+                <Label col="0" text="&#xf573;" class="fas"></Label>
+                <Label col="1" text="Pending Signatures"></Label>
+            </GridLayout> -->
+
+            <GridLayout *ngIf="scheduleEnabled$ | async" columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/scheduler')" (tap)="onNavItemTap('/scheduler')">
+                <Label col="0" text="&#xf073;" class="far"></Label>
+                <Label col="1" text="Scheduler"></Label>
+            </GridLayout>
+
+            <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/settings')" (tap)="onNavItemTap('/settings')">
+                <Label col="0" text="&#xf013;" class="fas"></Label>
+                <Label col="1" text="Settings"></Label>
+            </GridLayout>
+
+            <GridLayout columns="auto, *" class="sidedrawer-list-item" [class.selected]="isComponentSelected('/settings/contact-us')" (tap)="onNavItemTap('/settings/contact-us')">
+                <Label col="0" text="&#xf1d8;" class="fas"></Label>
+                <Label col="1" text="Contact Us"></Label>
+            </GridLayout>
+
+            <GridLayout columns="auto, *" class="sidedrawer-list-item" (tap)="logoutTap()">
+                <Label col="0" text="&#xf2f5;" class="fas"></Label>
+                <Label col="1" text="Log Out"></Label>
+            </GridLayout>
+        </StackLayout>
+    </ScrollView>
+
+    <StackLayout class="footer" row="3">
+        <Label marginBottom="10" [text]="appVersion"></Label>
+    </StackLayout>
+  </GridLayout>
+
+  <page-router-outlet tkMainContent class="page page-content"></page-router-outlet>
+</RadSideDrawer>

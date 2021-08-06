@@ -1,0 +1,51 @@
+<app-action-bar *ngIf="showActionBar" [backBtnText]="backBtnText" title="My Clients"></app-action-bar>
+<GridLayout rows="auto, auto, *">
+    <Label class="label-text" row="0" textWrap="true" [text]="labelText"></Label>
+    <StackLayout class="hr-line" row="1"></StackLayout>
+    <PullToRefresh (refresh)="refreshList($event)" row="2" color="#593c81">
+        <ScrollView row="2">
+            <StackLayout>
+                <GridLayout *ngFor="let clientList of outerClientList; let i = index" class="client-layout" rows="*, auto, auto" columns="*, auto">
+                    <Label class="client-label" row="0" col="0" [text]="clientList[0].Name"></Label>
+                    <StackLayout *ngIf="fromCheckIn && clientList.length > 1" class="center" row="0" col="1">
+                        <Label [class.up]="showPayrateList[i]" [class.down]="!showPayrateList[i]" class="fas dropdown-chervon" row="0" col="1" text="&#xf078;"></Label>
+                    </StackLayout>
+                    <StackLayout *ngIf="!fromCheckIn" class="center" row="0" col="1">
+                        <Label class="chevron-copy fas" text="&#xf054;"></Label>
+                    </StackLayout>
+                    <StackLayout row="0" col="0" colSpan="2" (tap)="onClientTap(i)"></StackLayout>
+                    <StackLayout *ngIf="showPayrateList[i]" class="payrate-layout" row="1" col="0" colSpan="2">
+                        <StackLayout *ngFor="let client of clientList; let j = index">
+                            <StackLayout class="hr-line"></StackLayout>
+                            <StackLayout orientation="horizontal" (tap)="onPayrateTap(i, j)">
+                                <Label [text]="dot"></Label>
+                                <Label class="pay-label" [text]="getPayRateType(client.PayRateType) + ': ' + client.PayRateComment"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout row="2" col="0" colSpan="2" class="hr-line"></StackLayout>
+                </GridLayout>
+                <!-- For dual (Spouse) Clients. !! For CheckIn Client list ONLY!! -->
+                <StackLayout *ngIf="fromCheckIn">
+                    <GridLayout *ngFor="let dualClientList of outerDualClientList; let i = index" class="client-layout" rows="*, auto, auto" columns="*, auto">
+                        <Label class="client-label" row="0" col="0" [text]="dualClientList[0].c1.Name + ' & ' + dualClientList[0].c2.Name"></Label>
+                        <StackLayout *ngIf="fromCheckIn && dualClientList.length > 1" class="center" row="0" col="1">
+                            <Label [class.up]="showDualPayrateList[i]" [class.down]="!showDualPayrateList[i]" class="fas dropdown-chervon" row="0" col="1" text="&#xf078;"></Label>
+                        </StackLayout>
+                        <StackLayout row="0" col="0" colSpan="2" (tap)="onDualClientTap(i)"></StackLayout>
+                        <StackLayout *ngIf="showDualPayrateList[i]" class="payrate-layout" row="1" col="0" colSpan="2">
+                            <StackLayout *ngFor="let dualClient of dualClientList; let j = index">
+                                <StackLayout class="hr-line"></StackLayout>
+                                <StackLayout orientation="horizontal" (tap)="onDualPayrateTap(i, j)">
+                                    <Label [text]="dot"></Label>
+                                    <Label class="pay-label" [text]="getPayRateType(dualClient.c1.PayRateType) + ': ' + dualClient.c1.PayRateComment + ' - ' + dualClient.c2.PayRateComment"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout row="2" col="0" colSpan="2" class="hr-line"></StackLayout>
+                    </GridLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </PullToRefresh>
+</GridLayout>

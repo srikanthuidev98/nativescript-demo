@@ -1,0 +1,19 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+.textField {
+    color: $primary-text;
+    border-bottom-width: 2;
+    margin-right: 20;
+    margin-left: 20;
+    margin-bottom: 10;
+}
+
+.hint {
+    color: $secondary-text;
+    font-size: 16;
+    margin-right: 20;
+    margin-left: 21;
+    margin-top: 10;
+    margin-bottom: -5;
+}

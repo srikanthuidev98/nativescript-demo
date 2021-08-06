@@ -1,0 +1,8 @@
+<app-action-bar title="My Schedule Test" [showCalendar]="true" (calendarTapped)="onCalendarIconTapped()">
+</app-action-bar>
+<FlexboxLayout justifyContent="space-between" flexDirection="column">
+    <ac-calendar #calendar selectionMode="Range" [events]="events" (dateSelected)="onDateSelected($event)"
+        (monthChanged)="onMonthChanged($event)" (selectedDateRange)="onDateDeSelected($event)"></ac-calendar>
+    <Button height="130" text="Check In" (tap)="checkInTapar()" class="secondary-button"></Button>
+    <Button height="130" text="Check In" (tap)="checkInTap()" class="secondary-button"></Button>
+</FlexboxLayout>

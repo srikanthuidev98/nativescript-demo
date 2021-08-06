@@ -1,0 +1,32 @@
+/* Add mobile styles for the component here.  */
+@import '../../../../ACCommon/styles/common';
+
+Image {
+    width: 300;
+    margin: 20;
+}
+
+Label {
+    color: $primary-text;
+    font-size: 16;
+    margin-right: 15;
+    margin-left: 15;
+    margin-top: 15;
+}
+
+.top-text {
+    font-weight: bold;
+}
+
+Button {
+    width: auto;
+    margin: 5;
+    margin-bottom: 0;
+}
+
+.decline {
+    border-width: 2;
+    border-color: $primary;
+    background-color: white;
+    color: $primary;
+}

@@ -1,0 +1,13 @@
+<!-- <app-action-bar backBtnText="Back" [title]="'SIGNATURE.TITLE' | translate"></app-action-bar> -->
+<ScrollView>
+    <StackLayout backgroundColor="white"> 
+        <Label class="title" textWrap="true" text="Please sign the pad below to approve this visit"></Label>
+        <GridLayout marginBottom="20" rows="*, auto" columns="*, auto">
+            <DrawingPad #DrawingPad height="200" width="100%" row="0" col="0" rowSpan="2" colSpan="2" penColor="black" penWidth="2" background="#d8d8d8" clearOnLongPress="false"></DrawingPad>
+            <Button row="1" col="1" class="borderless-button clear-btn" [text]="'SIGNATURE.CLEARBTN' | translate" (tap)="clearMyDrawing()"></Button>
+        </GridLayout>
+
+        <Button class="primary-button-disabled" text="Continue" (tap)="saveSignature()"></Button>   
+        <Button class="borderless-button" text="Cancel" (tap)="closeModal('')"></Button>
+    </StackLayout>
+</ScrollView>

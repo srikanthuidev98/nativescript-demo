@@ -1,0 +1,9 @@
+{
+    "apiEndpoint": "https://www.assuricare.com/MobileRestAPI/api/",
+    "newApiEndpoint": "https://www.assuricare.com/AssuriCareAPI/External/",
+    "careWhenEndpoint": "https://apirc.registryconnect.com/api/",
+    "azureAppService": "https://ac-spanqi-web-staging.azurewebsites.net",
+    "loggingEnabled": true,
+    "loggingLevel": "Error",
+    "environment": "Production"
+}

@@ -1,0 +1,46 @@
+<app-action-bar backBtnText="Back" title="Reminder"></app-action-bar>
+<StackLayout>
+    <GridLayout class="custom-tab-container" rows="*, 5" columns="*, *"> <!-- Tabs -->
+        <!-- Tab 1 -->
+        <Button [class.selected]="selectedTab === 0" row="0" col="0" text="Specific Hour" (tap)="tabTap(0)"></Button>
+        <StackLayout [class.selected]="selectedTab === 0" row="1" col="0"></StackLayout>
+
+        <!-- Tab 2 -->
+        <Button [class.selected]="selectedTab === 1" row="0" col="1" text="Hours from now" (tap)="tabTap(1)"></Button>
+        <StackLayout [class.selected]="selectedTab === 1" row="1" col="1"></StackLayout>
+    </GridLayout>
+
+    <StackLayout *ngIf="selectedTab === 0" class="m-t-30"> <!-- Page 1 - Specific Hour -->
+        <GridLayout columns="auto, *, auto" height="auto" class="center">
+            <Label class="fas day-picker m-l-20" col="0" text="&#xf053;" (tap)="changeDay()"></Label>
+            <Label class="day-picker" col="1" [text]="day"></Label>
+            <Label class="fas day-picker m-r-20" col="2" text="&#xf054;" (tap)="changeDay()"></Label>
+        </GridLayout>
+        <TimePicker (loaded)="pickerLoaded($event)" (timeChange)="onTimeChanged($event)" verticalAlignment="center" class="m-15"></TimePicker>
+
+        <Button class="primary-button" text="Set reminder" (tap)="setReminderTap(0)"></Button>
+        <Label *ngIf="error" class="validation-error" [text]="error"></Label>
+    </StackLayout>
+
+    <StackLayout *ngIf="selectedTab === 1" class="m-t-30"> <!-- Page 2 - Hours from now -->
+        <StackLayout class="center">
+            <Label class="time-title" [text]="hour + ':' + minute"></Label>
+        </StackLayout>
+
+        <GridLayout class="m-b-20" columns="*, auto, *, auto, *" height="150">
+            <GridLayout class="clicker" row="1" col="1" rows="*, *, *" columns="*, auto, *">
+                <Button class="borderless-button clicker-text" row="0" col="1" text="+" (tap)="clickerTap('+', 'hour')"></Button>
+                <Label class="clicker-text center" row="1" col="1" [text]="hour"></Label>
+                <Button class="borderless-button clicker-text" row="2" col="1" text="-" (tap)="clickerTap('-', 'hour')"></Button>
+            </GridLayout>
+            <GridLayout class="clicker" row="1" col="3" rows="*, *, *" columns="*, auto, *">
+                <Button class="borderless-button clicker-text" row="0" col="1" text="+" (tap)="clickerTap('+', 'minute')"></Button>
+                <Label class="clicker-text center" row="1" col="1" [text]="minute"></Label>
+                <Button class="borderless-button clicker-text" row="2" col="1" text="-" (tap)="clickerTap('-', 'minute')"></Button>
+            </GridLayout>
+        </GridLayout>
+
+        <Button class="primary-button" text="Set reminder" (tap)="setReminderTap(1)"></Button>
+        <Label *ngIf="error" class="validation-error" [text]="error"></Label>
+    </StackLayout>
+</StackLayout>

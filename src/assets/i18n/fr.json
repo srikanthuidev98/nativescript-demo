@@ -1,0 +1,25 @@
+{
+    "LOGIN": {
+        "EMAIL": "Email",
+        "PASSWORD": "Mot de passe",
+        "REMEMBEREMAIL": "Mémoriser Email",
+        "LOGIN": "S'identifier",
+        "FORGOTPASSWORD": "Oublié mon mot de passe"
+    },
+
+    "SIGNATURE": {
+
+        "HEADERTITLE": "Signature",
+        "TITLE": "Electronic Signature",
+        "INSTRUCTIONS": "Before signing, please read the warning for the state where you reside and for the sate where the insurance policy under which you are claming a benifit was issued.",
+        "FRAUDTITLE": "Fraud Statement",
+        "FRAUDSTATEMENT": "Placeholder",
+        "SELECTNAME": "Select Your Name",
+        "CERTIFY": "I Certify that the above informatin is true and correct",
+        "CLEARBTN": "Clear",
+        "AGREE": "I agree",
+        "DISAGREE": "I disagree",
+        "APROVEBTN": "I approve this visit"
+
+    }
+}

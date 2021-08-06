@@ -1,0 +1,55 @@
+<app-action-bar backBtnText="Clients" [title]="title"></app-action-bar>
+<Scrollview>
+    <StackLayout>
+        <Label *ngIf="audioType === 'checkin'" textWrap="true" class="top-text" text="To Check In, tap the button and clearly state your first and last name and today's date."></Label>
+        <Label *ngIf="audioType === 'checkout'" textWrap="true" class="top-text" text="To Check Out, tap the button and clearly state your first and last name and today's date."></Label>
+
+        <StackLayout class="center">
+            <Label class="time" [text]="seconds + '.' + milliseconds + 's'"></Label>
+        </StackLayout>
+
+        <GridLayout rows="200" columns="*, 200, *">
+            <ContentView *ngIf="!isRecording" class="circle" row="0" col="1" backgroundColor="#8d5fcc" heigth="200" width="200"></ContentView>
+            <ContentView *ngIf="!isRecording" class="circle" row="0" col="1" backgroundColor="#593c81" heigth="185" width="185" ></ContentView>
+
+            <ContentView *ngIf="isRecording" class="circle" row="0" col="1" backgroundColor="#ee2f15" heigth="200" width="200"></ContentView>
+            <ContentView *ngIf="isRecording" class="circle" row="0" col="1" backgroundColor="#ec5642" heigth="185" width="185" ></ContentView>
+            <StackLayout class="center p-b-7" row="0" col="1" (tap)="record()">
+                <Label  text="&#xf130;" class="fas mic"></Label>
+            </StackLayout>
+        </GridLayout>
+
+        <Label *ngIf="!isRecording && !audioHasBeenRecorded" text="Tap the button to record" class="bottom-text"></Label>
+        <Label *ngIf="isRecording" text="Tap the button to stop" class="bottom-text"></Label>
+
+        <Label *ngIf="!isRecording && audioHasBeenRecorded && !soundRecorded" text="Your voice was not recognized" class="bottom-text"></Label>
+        <Label *ngIf="!isRecording && audioHasBeenRecorded && !soundRecorded" text="Tap the button to re-record your message" class="bottom-text m-b-20"></Label>
+
+        <Label *ngIf="!isRecording && audioHasBeenRecorded && soundRecorded" text="Tap the button to re-record" class="bottom-text"></Label>
+        <Label *ngIf="!isRecording && audioHasBeenRecorded && soundRecorded" text="or Continue to move on" class="bottom-text m-b-20"></Label>
+
+        <Button [visibility]="audioHasBeenRecorded && soundRecorded && !isRecording ? 'visible' : 'collapsed'" class="primary-button" text="Continue" (tap)="continueTap()"></Button>
+
+        <GridLayout [visibility]="isRecording ? 'visible' : 'collapsed'" height="150" width="50%" columns="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" >
+            <ContentView #bar1 col="0" (loaded)="loadBars(bar1,.1,1)" class="modulation-bar" ></ContentView>
+            <ContentView #bar2 col="1" (loaded)="loadBars(bar2,.2,2)" class="modulation-bar" ></ContentView>
+            <ContentView #bar3 col="2" (loaded)="loadBars(bar3,.3,3)" class="modulation-bar" ></ContentView>
+            <ContentView #bar4 col="3" (loaded)="loadBars(bar4,.4,4)" class="modulation-bar" ></ContentView>
+            <ContentView #bar5 col="4" (loaded)="loadBars(bar5,.5,5)" class="modulation-bar" ></ContentView>
+            <ContentView #bar6 col="5" (loaded)="loadBars(bar6,.6,6)" class="modulation-bar" ></ContentView>
+            <ContentView #bar7 col="6" (loaded)="loadBars(bar7,.7,7)" class="modulation-bar" ></ContentView>
+            <ContentView #bar8 col="7" (loaded)="loadBars(bar8,.8,8)" class="modulation-bar" ></ContentView>
+            <ContentView #bar9 col="8" (loaded)="loadBars(bar9,.9,9)" class="modulation-bar" ></ContentView>
+            <ContentView #bar10 col="9" (loaded)="loadBars(bar10,1,10)" class="modulation-bar" ></ContentView>
+            <ContentView #bar11 col="10" (loaded)="loadBars(bar11,.9,11)" class="modulation-bar" ></ContentView>
+            <ContentView #bar12 col="11" (loaded)="loadBars(bar12,.8,12)" class="modulation-bar" ></ContentView>
+            <ContentView #bar13 col="12" (loaded)="loadBars(bar13,.7,13)" class="modulation-bar" ></ContentView>
+            <ContentView #bar14 col="13" (loaded)="loadBars(bar14,.6,14)" class="modulation-bar" ></ContentView>
+            <ContentView #bar15 col="14" (loaded)="loadBars(bar15,.5,15)" class="modulation-bar" ></ContentView>
+            <ContentView #bar16 col="15" (loaded)="loadBars(bar16,.4,16)" class="modulation-bar" ></ContentView>
+            <ContentView #bar17 col="16" (loaded)="loadBars(bar17,.3,17)" class="modulation-bar" ></ContentView>
+            <ContentView #bar18 col="17" (loaded)="loadBars(bar18,.2,18)" class="modulation-bar" ></ContentView>
+            <ContentView #bar19 col="18" (loaded)="loadBars(bar19,.1,19)" class="modulation-bar" ></ContentView>
+        </GridLayout>
+    </StackLayout>
+</Scrollview>

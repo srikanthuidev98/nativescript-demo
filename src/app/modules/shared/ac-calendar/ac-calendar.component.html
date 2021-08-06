@@ -1,0 +1,18 @@
+<GridLayout rows="auto, auto, auto *">
+    <GridLayout row="0" class="header" height="40" columns="auto, *, auto">
+        <Label class="far arrow p-r-20" col="0" text="&#xf053;" (tap)="arrowTap('back')" isPassThroughParentEnabled="true"></Label>
+        <GridLayout col="1" columns="*, auto, auto, *" (tap)="titleTap()">
+            <StackLayout class="center" col="1">
+                <Label [text]="title" fontWeight="500"></Label>
+            </StackLayout>
+            <StackLayout class="center" marginLeft="5" col="2">
+                <Label [class.up]="type === 'Month'" fontSize="14" [class.down]="type === 'Week'" class="fas dropdown-chervon" text="&#xf078;"></Label>
+            </StackLayout>
+        </GridLayout>
+        <Label class="far arrow p-l-20" col="2" text="&#xf054;" (tap)="arrowTap('forward')"></Label>
+    </GridLayout>
+
+    <StackLayout row="1" class="calendar" orientation="horizontal">
+        <RadCalendar (loaded)="calendarLoaded($event)" [eventSource]="eventSource()" (dateSelected)="onDateSelected($event)" [height]="calendarheight" #myCalendar (navigatingToDateStarted)="dateChanged($event)"></RadCalendar>
+    </StackLayout>
+</GridLayout>

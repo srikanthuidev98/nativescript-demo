@@ -1,0 +1,16 @@
+<app-action-bar backBtnText="Back" title="Client Available"></app-action-bar>
+<GridLayout rows="auto, auto, auto" (loaded)="loaded()">
+    <StackLayout class="header-text center" row="0">
+        <Label textWrap="true" [text]="title"></Label>
+    </StackLayout>
+    <GridLayout class="yes-rectangle center" [class.selected]="yesSelected" columns="auto, *, *" rows="*, auto, *" row="1" (tap)="yesTap()">
+        <Label *ngIf="!isDualClient" class="fal font-image" col="0" row="0" rowSpan="3" text="&#xf4fc;"></Label>
+        <Label *ngIf="isDualClient" class="fal font-image" col="0" row="0" rowSpan="3" text="&#xf481;"></Label>
+        <Label class="footer-text" col="2" row="1" text="Yes"></Label>
+    </GridLayout>
+    <GridLayout class="no-rectangle center" [class.selected]="noSelected" columns="auto, *, *" rows="*, auto, *" row="2" (tap)="noTap()">
+        <Label *ngIf="!isDualClient" class="fal font-image" col="0" row="0" rowSpan="3" text="&#xf235;"></Label>
+        <Label *ngIf="isDualClient" class="fal font-image" col="0" row="0" rowSpan="3" text="&#xf481;"></Label>
+        <Label class="footer-text" col="2" row="1" text="No"></Label>
+    </GridLayout>
+</GridLayout>

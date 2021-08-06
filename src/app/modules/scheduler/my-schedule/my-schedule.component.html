@@ -1,0 +1,27 @@
+<app-action-bar title="My Schedule" [showCalendar]="true" (calendarTapped)="onCalendarIconTapped()"></app-action-bar>
+
+<GridLayout rows="*">
+    <GridLayout rows="auto, auto, *" row="0">
+        <StackLayout row="0">
+            <ac-calendar #calendar [events]="events" (dateSelected)="onDateSelected($event)" (monthChanged)="onMonthChanged($event)"></ac-calendar>
+        </StackLayout>
+
+        <StackLayout *ngIf="calendar.type === 'Week'" row="1">
+            <Label class="scheduled_hours" [text]="'Scheduled Hours: ' + scheduledHours"></Label>
+            <StackLayout class="hr-line"></StackLayout>
+        </StackLayout>
+        <Label *ngIf="calendar.type !== 'Week'" row="1" text="" height="30"></Label>
+
+        <ListView #listview row="2" [items]="shownData" separatorColor="transparent" (itemLoading)="onItemLoading($event)">
+            <ng-template let-visit="item" let-i="index" iosEstimatedRowHeight="150">
+                <StackLayout height="170" android:paddingBottom="-2" ios:marginBottom="-20" paddingLeft="0" paddingRight="0">
+                    <app-calendar-card (cancelledDetailTapped)="cancelledDetailTap($event)" [visit]="visit"></app-calendar-card>
+                </StackLayout>
+            </ng-template>
+        </ListView>
+        <Label *ngIf="!(loading$ | async) && shownData.length === 0" row="2" textWrap="true" class="no-visit-label" text="No scheduled visits this week."></Label>
+    </GridLayout>
+
+    <!-- Dialog -->
+    <app-custom-dialog *ngIf="dialogOpen" [data]="dialogData" row="0" (dialogClosed)="closeDialog($event)"></app-custom-dialog>
+</GridLayout>
